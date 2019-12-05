@@ -31,16 +31,19 @@
 <div class="">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
-                <ul class='nav flex-column'>
-                    <li class='nav-item'">
-                        <a class='nav-link' href='#'>
-                            <icon:svg iconType="dashboard" message="${message(code: 'default.dashboard.lable')}" />
-                        </a>
-                    </li>
+                <div class="accordion" id="accordionExample">
+                    <ul class='nav flex-column'>
+                        <li class='nav-item'>
+                            <a class='nav-link' href='#'>
+                                <icon:svg iconType="dashboard" message="${message(code: 'default.dashboard.lable')}" />
+                            </a>
+                        </li>
+                    </ul>
                     <g:render template="public/navList" />
-                </ul>
+                </div>
             </div>
         </nav>
+
         <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
             <g:layoutBody/>
         </main>

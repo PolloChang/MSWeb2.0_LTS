@@ -15,16 +15,16 @@
             </g:elseif>
             <g:else>
                 <ul class="errors">
-                    <li>An error has occurred</li>
+                    <li>有一個問題發生</li>
                     <li>Exception: ${exception}</li>
-                    <li>Message: ${message}</li>
-                    <li>Path: ${path}</li>
+                    <li>錯誤訊息: ${message}</li>
+                    <li>路徑: ${path}</li>
                 </ul>
             </g:else>
         </g:if>
         <g:else>
             <ul class="errors">
-                <li>An error has occurred</li>
+                <li>404</li>
             </ul>
         </g:else>
     </body>

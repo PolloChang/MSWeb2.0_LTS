@@ -15,4 +15,5 @@
  */
 function changeIframeMain(srcValue){
     $("#ifromDataMain").attr("src",srcValue);
+    $('#myTab li:last-child a').tab('show');
 }
