@@ -17,9 +17,11 @@ class ModalTagLib {
         def ariaLabelledby = attrs.remove("ariaLabelledby")
         String id = attrs.remove("id")
         boolean staticType = attrs.remove("static")?:false
+        String modalDialogClass = attrs.remove("modalDialogClass")?:""
+        String modalClass = attrs.remove("modalClass")?:""
 
-        out << "<div class='modal fade' id='${id}' ${staticType?"data-backdrop='static'":""} tabindex='-1' role='dialog' ${ariaLabelledby?"aria-labelledby='"+ariaLabelledby+"'":""} aria-hidden='true'>"
-        out <<  "<div class='modal-dialog' role='document'>"
+        out << "<div class='modal fade ${modalClass}' id='${id}' ${staticType?"data-backdrop='static'":""} tabindex='-1' role='dialog' ${ariaLabelledby?"aria-labelledby='"+ariaLabelledby+"'":""} aria-hidden='true'>"
+        out <<  "<div class='modal-dialog ${modalDialogClass}' role='document'>"
         out <<  "<div class='modal-content'>"
         out << body()
         out <<  "</div>"

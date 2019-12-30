@@ -113,6 +113,7 @@ environments:
         dataSource:
             dbCreate: none
             url: jdbc:mariadb://localhost:3306/fwjdba
+
     production:
         dataSource:
             dbCreate: none

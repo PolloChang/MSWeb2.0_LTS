@@ -23,7 +23,7 @@
                 <thead>
                 <tr class="bg-info">
                     <th colspan="4">
-                        <icon:svg iconType="search" message="查詢條件"/>
+                        <icon:svg iconType="search" message="${g.message(code: 'page.default.search.label')}"/>
                     </th>
                 </tr>
                 </thead>
@@ -64,18 +64,13 @@
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.addr.lable')}</th>
                     <td colspan="3">
                         <jc:textField name="zip" />
-                        <jc:multipleSelect name="citycode" from="${bs.Bs200.getAll()}" optionKey="code" optionValue="textShow" noSelection="['':'---']" selectDataSize="5" dataLiveSearch="true" />
+                        <jc:multipleSelect name="citycode" class="addrChang" from="${bs.Bs200.getAll()}" optionKey="code" optionValue="textShow" noSelection="['':'---']" selectDataSize="5" dataLiveSearch="true" />
                         <span id="twnspcodeOption">
-                            <jc:multipleSelect name="twnspcode" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
+                            <jc:multipleSelect name="twnspcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
                         </span>
                         <span id="vilgcodeOption">
-                            <jc:multipleSelect name="vilgcode" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
+                            <jc:multipleSelect name="vilgcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
                         </span>
-                        <asset:script>
-                            $("#cities")
-                            .html('<option>city1</option><option>city2</option>')
-                            .selectpicker('refresh');
-                        </asset:script>
                     </td>
                 </tr>
 
@@ -87,7 +82,7 @@
                         <jc:botton type="button" class="btn btn-outline">${g.message(code: 'default.button.clear.label')}</jc:botton>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">${g.message(code: 'default.button.create.label')}</button>
+                        <jc:botton onclick="openMondal('modalSpan','${createLink(controller: "ex100", action: "creatEx100")}');" type="button" class="btn btn-success">${g.message(code: 'default.button.create.label')}</jc:botton>
                     </div>
                 </td></tr></tfoot>
             </table>
@@ -98,16 +93,12 @@
     </div>
 </g:form>
 
-<!-- Modal -->
-<jc:modalContent id="exampleModal" static="true" ariaLabelledby="exampleModalLabel">
-    <jc:moalHeader title="Modal title" ariaLabelledby="exampleModalLabel">
-    </jc:moalHeader>
-    <jc:moalBody>
-        ${g.message(code: "ex.largString.lable")}
-    </jc:moalBody>
-    <jc:moalFooter></jc:moalFooter>
-</jc:modalContent>
+    <!-- Modal -->
+    <span id="modalSpan" />
     </div>
 </div>
+<script type="text/javascript">
+</script>
+<asset:javascript src="projectJS/ex/ex.js"/>
 </body>
 </html>

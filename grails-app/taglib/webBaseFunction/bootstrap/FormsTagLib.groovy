@@ -125,6 +125,8 @@ class FormsTagLib {
         String dataWidth = attrs.remove('dataWidth')
         String selectDataSize = attrs.remove('selectDataSize')
         String dataSelectedTextFormat = attrs.remove('dataSelectedTextFormat')//ex:count,count > 5
+        String onclick = attrs.remove("onchange")
+        String onchange = attrs.remove("onchange")
 
         def optionKey = attrs.remove('optionKey')
         def optionDisabled = attrs.remove('optionDisabled')
@@ -185,7 +187,15 @@ class FormsTagLib {
         }
 
         if(dataSelectedTextFormat){
-            writer << " data-selected-text-format='${attrs.title}' "
+            writer << " data-selected-text-format='${dataSelectedTextFormat}' "
+        }
+
+        if(onclick){
+            writer << " onchange='${onclick}' "
+        }
+
+        if(onchange){
+            writer << " onchange='${onchange}' "
         }
 
         writer << '>'
