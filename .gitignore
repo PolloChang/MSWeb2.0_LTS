@@ -26,3 +26,5 @@ out/
 /src/test/groovy/ex/Ex100Spec.groovy
 /src/test/groovy/sys/InformationControllerSpec.groovy
 /src/test/groovy/webBaseFunction/IconTagLibSpec.groovy
+BootstrapTagLibSpec.groovy
+ModalTagLibSpec.groovy
