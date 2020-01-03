@@ -9,6 +9,6 @@
 *= require bootstrap.css
 *= require bootstrap-grid.css
 *= require bootstrap-reboot.css
-*= require bootstrap-select/bootstrap-select.css
+*= require multiple-select/multiple-select.min.css
 *= encoding UTF-8
 */

@@ -7,6 +7,7 @@ class Ex100Controller {
 
     def creatEx100 = {
         def modalId = params?.modalId
-        render view: 'creatEx100', model: ['modalId':modalId]
+        def ex100I = new Ex100()
+        render view: 'creatEx100', model: ['modalId':modalId,readonly:false,ex100I:ex100I]
     }
 }

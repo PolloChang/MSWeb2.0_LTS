@@ -5,12 +5,13 @@
 // You're free to add application-wide JavaScript to this file, but it's generally better
 // to create separate JavaScript files as needed.
 //
-//= require jquery-3.3.1.min.js
+//= require jquery.min.js
 //= require popper.min.js
 //= require bootstrap.js
 //= require bootstrap.bundle.js
-//= require bootstrap-select/bootstrap-select.js
-//= require_self
+//= require multiple-select/multiple-select.min.js
+//= require multiple-select/multiple-select-locale-all.min.js
+//= encoding UTF-8
 
 /**
  * 切換iframe
@@ -20,10 +21,30 @@ function changeIframeMain(srcValue){
     $('#myTab li:last-child a').tab('show');
 }
 
-function changSelectOption(optionId){
-    $("#"+optionId)
-        .html('<option>city1</option><option>city2</option>')
-        .selectpicker('refresh');
+/**
+ *
+ * @param optionId:替換Id
+ * @param url
+ * @param thisVal
+ */
+function ajaxChangSelectOption(thisVal,optionId,url){
+    jQuery.ajax({
+        url: url,
+        data:{whereItem:thisVal.toString()},
+        type: "POST",
+        ataType: "JSON",
+        success: function (json) {
+            for(var i=0;i < json.exportData.length; i++){
+                var optionTag = document.createElement("option");
+                optionTag.value = json.exportData[i].value;
+                optionTag.text = json.exportData[i].text;
+                $('#'+optionId).append(optionTag).multipleSelect('refresh');
+            }
+        },
+        beforeSend:function(){
+            $('#'+optionId+' option').remove();
+        }
+    });
 }
 
 /**
@@ -65,8 +86,5 @@ function _uuid() {
  * 一進入頁面執行
  */
 $(function() {
-    $('.addrChang').on('change', function(){
-        alert(this.id);
-        changSelectOption('twnspcode');
-    });
+    $('select').multipleSelect({});
 });

@@ -113,28 +113,28 @@ class FormsTagLib {
         if (!attrs.containsKey('from')) {
             throwTagError("Tag [select] is missing required attribute [from]")
         }
+
+        String id = attrs.remove('id')?:attrs.name
+        String name = attrs.remove('name')
+        def value = attrs.remove('value')
+
         def messageSource = grailsAttributes.getApplicationContext().getBean("messageSource")
         def locale = RequestContextUtils.getLocale(request)
         def writer = out
         def selectClass = attrs.remove('class')
         def from = attrs.remove('from')
         boolean selectDisabled = attrs.remove('selectDisabled')?:false
-        boolean required = attrs.remove("required")?:false
-        boolean dataActionsBox = attrs.remove('dataActionsBox')?:false
-        boolean dataLiveSearch = attrs.remove('dataLiveSearch')?:false
-        String dataWidth = attrs.remove('dataWidth')
-        String selectDataSize = attrs.remove('selectDataSize')
-        String dataSelectedTextFormat = attrs.remove('dataSelectedTextFormat')//ex:count,count > 5
         String onclick = attrs.remove("onchange")
         String onchange = attrs.remove("onchange")
+        String nextSelectId = attrs.remove("nextSelectId")
+        String nextSelectUrl = attrs.remove("nextSelectUrl")
 
         def optionKey = attrs.remove('optionKey')
         def optionDisabled = attrs.remove('optionDisabled')
         def optionValue = attrs.remove('optionValue')
 
-        def value = attrs.remove('value')
         boolean multiple = attrs.remove('multiple')
-        String title = attrs.remove('title')
+        String placeholder = attrs.remove('placeholder')
         if (value instanceof CharSequence) {
             value = value.toString()
         }
@@ -148,7 +148,10 @@ class FormsTagLib {
 
         writer << "<select "
 
-        writer << "class='selectpicker "
+        writer << "id='${id}' "
+        writer << "name='${name}' "
+
+        writer << "class=' "
         if(selectClass){
             writer << selectClass
         }
@@ -159,43 +162,27 @@ class FormsTagLib {
             writer << "multiple"
         }
 
-        if(required){
-            writer << " required "
-        }
-
         if(selectDisabled){
             writer << " disabled "
         }
-        if(title){
-            writer << " title='${attrs.title}' "
-        }
-
-        if(dataActionsBox){
-            writer << " data-actions-box='true' "
-        }
-
-        if(dataLiveSearch){
-            writer << " data-live-search='true' "
-        }
-
-        if(dataWidth){
-            writer << " data-width='${dataWidth}' "
-        }
-
-        if(selectDataSize){
-            writer << " data-size='${selectDataSize}' "
-        }
-
-        if(dataSelectedTextFormat){
-            writer << " data-selected-text-format='${dataSelectedTextFormat}' "
-        }
 
         if(onclick){
-            writer << " onchange='${onclick}' "
+            writer << " onclick='${onclick}' "
         }
 
         if(onchange){
             writer << " onchange='${onchange}' "
+        }
+
+        /**
+             * 下階層選單
+             */
+        if(nextSelectUrl && nextSelectId){
+            writer << """onchange='ajaxChangSelectOption(\$("#${id}").multipleSelect("getSelects"),"${nextSelectId}","${nextSelectUrl}");'"""
+        }
+
+        if(placeholder){
+            writer << " placeholder='${placeholder}' "
         }
 
         writer << '>'
@@ -205,8 +192,6 @@ class FormsTagLib {
             renderNoSelectionOptionImpl(writer, noSelection.key, noSelection.value, value)
             writer.println()
         }
-
-
 
         // create options from list
         from.eachWithIndex {el, i ->

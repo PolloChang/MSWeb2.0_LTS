@@ -29,48 +29,52 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.numbers.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.numbers.label')}</th>
                     <td><jc:numberField name="numbers" readonly="true" /></td>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.amts.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.amts.label')}</th>
                     <td>
                         <jc:moneyField name="amts" />
                     </td>
                 </tr>
                 <tr>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.string.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.string.label')}</th>
                     <td><jc:textField name="string"/></td>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.texts.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.texts.label')}</th>
                     <td><jc:textField name="texts"/></td>
                 </tr>
                 <tr>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.idno.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.idno.label')}</th>
                     <td colspan="3"><jc:textField name="idno"/></td>
                 </tr>
                 <tr>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.name.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.name.label')}</th>
                     <td><jc:textField name="name"/></td>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.sex.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.sex.label')}</th>
                     <td>
                         <jc:multipleSelect name="example" from="${bs.Bs101.findAllByPtype('GENDER')}" optionKey="pcode" optionValue="typedesc" noSelection="['':'---']" />
+                        <select id="object"></select>
                     </td>
                 </tr>
                 <tr>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.birthdy.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.birthdy.label')}</th>
                     <td>Mark</td>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.unid.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.unid.label')}</th>
                     <td><jc:numberField name="unid" /></td>
                 </tr>
                 <tr>
-                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.addr.lable')}</th>
+                    <th class="table-info text-right" scope="row">${g.message(code: 'ex100.addr.label')}</th>
                     <td colspan="3">
                         <jc:textField name="zip" />
-                        <jc:multipleSelect name="citycode" class="addrChang" from="${bs.Bs200.getAll()}" optionKey="code" optionValue="textShow" noSelection="['':'---']" selectDataSize="5" dataLiveSearch="true" />
-                        <span id="twnspcodeOption">
-                            <jc:multipleSelect name="twnspcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
-                        </span>
-                        <span id="vilgcodeOption">
-                            <jc:multipleSelect name="vilgcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
-                        </span>
+                        <jc:multipleSelect name="citycode" class=""
+                                       from="${bs.Bs200.getAll()}"
+                                       optionKey="code" optionValue="textShow" noSelection="['':'---']"
+                                       nextSelectId="twnspcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs201Select")}"
+                        />
+                        <jc:multipleSelect name="twnspcode" class="addrChang"
+                                       from="[[key:'',val:'---']]" optionKey="key" optionValue="val"
+                                       nextSelectId="vilgcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs202Select")}"
+                        />
+                        <jc:multipleSelect name="vilgcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
                     </td>
                 </tr>
 
@@ -88,7 +92,6 @@
             </table>
         </div>
         <div class="row">
-
         </div>
     </div>
 </g:form>

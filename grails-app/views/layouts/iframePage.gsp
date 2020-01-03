@@ -7,15 +7,16 @@
     <asset:stylesheet src="bootstrap.css"/>
     <asset:stylesheet src="bootstrap-grid.css"/>
     <asset:stylesheet src="bootstrap-reboot.css"/>
-    <asset:stylesheet src="bootstrap-select/bootstrap-select.css" />%{--https://developer.snapappointments.com/bootstrap-select/--}%
     <asset:stylesheet src="comments.css"/>
+    <asset:stylesheet src="multiple-select/multiple-select.min.css"/>
     <g:layoutHead/>
 
-    <asset:javascript src="jquery-3.3.1.min.js"/>
+    <asset:javascript src="jquery.min.js"/>
     <asset:javascript src="popper.min.js"/>
     <asset:javascript src="bootstrap.js"/>
     <asset:javascript src="bootstrap.bundle.js"/>
-    <asset:javascript src="bootstrap-select/bootstrap-select.js"/>%{--https://developer.snapappointments.com/bootstrap-select/--}%
+    <asset:stylesheet src="multiple-select/multiple-select.min.js"/>
+    <asset:stylesheet src="multiple-select/multiple-select-locale-all.min.js"/>
     <asset:javascript src="application.js"/>
 </head>
 
