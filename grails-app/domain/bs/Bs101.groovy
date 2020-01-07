@@ -12,6 +12,13 @@ class Bs101 {
     String		creator
     Date		updt
     String		upator
+    Integer     idx
+    String      exceptionString1
+    String      exceptionString2
+    String      exceptionString3
+    Integer     exceptionInt1
+    Integer     exceptionInt2
+    Integer     exceptionInt3
 
 
     static mapping = {
@@ -28,6 +35,15 @@ class Bs101 {
         creator				column:"CREATOR",			comment:"資料建立者"
         updt				column:"UPDT",				comment:"資料更新時間"
         upator				column:"UPATOR",			comment:"資料更新者"
+        idx                 column:"IDX",			    comment:"排序"
+        exceptionString1    column: "EXCEPTION_STRING1",comment:"例外字串1"
+        exceptionString2    column: "EXCEPTION_STRING2",comment:"例外字串2"
+        exceptionString3    column: "EXCEPTION_STRING3",comment:"例外字串3"
+        exceptionInt1       column: "EXCEPTION_INT1",   comment:"例外數字1"
+        exceptionInt2       column: "EXCEPTION_INT2",   comment:"例外數字2"
+        exceptionInt3       column: "EXCEPTION_INT3",   comment:"例外數字3"
+
+        sort idx: "asc" // or "asc"
     }
 
 
@@ -42,5 +58,12 @@ class Bs101 {
         creator				(nullable:false, blank: false, maxSize: 20)
         updt				(nullable:false, blank: false)
         upator				(nullable:true, maxSize: 20)
+        idx                 (nullable:true)
+        exceptionString1    (nullable:true)
+        exceptionString2    (nullable:true)
+        exceptionString3    (nullable:true)
+        exceptionInt1       (nullable:true)
+        exceptionInt2       (nullable:true)
+        exceptionInt3       (nullable:true)
     }
 }

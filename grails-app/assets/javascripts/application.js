@@ -11,6 +11,7 @@
 //= require bootstrap.bundle.js
 //= require multiple-select/multiple-select.min.js
 //= require multiple-select/multiple-select-locale-all.min.js
+//= require jquery-ui/jquery-ui.min.js
 //= encoding UTF-8
 
 /**

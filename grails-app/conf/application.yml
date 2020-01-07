@@ -103,6 +103,7 @@ dataSource:
     driverClassName: org.mariadb.jdbc.Driver
     username: fwjdba
     password: 'fwjdba**831554'
+    logSql: false
 
 environments:
     development:

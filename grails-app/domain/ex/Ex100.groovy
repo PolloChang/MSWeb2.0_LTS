@@ -2,6 +2,7 @@ package ex
 
 class Ex100 {
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
+    UUID id
     int issure = 2
     String notes
     String		manCreated
@@ -33,7 +34,7 @@ class Ex100 {
         comment '資料範例'
         version true
 
-        id					column:"OBJID"
+        id					column:"UUID",generator: "uuid2", type: "uuid-binary", length: 16
         issure				column:"ISSURE"         ,comment:"資料狀態"
         notes				column:"NOTES"          ,comment:"資料註記"
         dateCreated			column:"CREATDATETINE"  ,omment:"資料建立時間"

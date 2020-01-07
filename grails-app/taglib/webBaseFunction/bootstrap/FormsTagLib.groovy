@@ -43,6 +43,38 @@ class FormsTagLib {
     }
 
     /**
+     * 日期選擇器
+     */
+    Closure datepicker = { attrs, body ->
+        if (!attrs.name) {
+            throwTagError("Tag [select] is missing required attribute [name]")
+        }
+
+        def uuid = UUID.randomUUID().toString()
+        def id = attrs.remove('id')?:uuid
+        def name = attrs.remove('name')
+        String value = attrs.remove('value')?:""
+        String Class = attrs.remove('class')?:""
+        boolean readonly = attrs.remove('readonly')?:false
+
+        out << "<input id='${id}' name='${name}' value='${value}' class='form-control ${Class}' ${readonly?"readonly":""} style='width: 120px;display: inline-block;'>"
+        out << """
+                <script type="text/javascript">
+                    jQuery( function() {
+                        jQuery( "#${id}" ).datepicker({
+                            showButtonPanel: true,
+                            changeYear: true,
+                            changeMonth: true,
+                            dateFormat:'yy-mm-dd',
+                            showWeek: true,
+                            firstDay: 1
+                        });
+                    } );
+                </script>
+            """
+    }
+
+    /**
      * 文字
      */
     Closure textField = { attrs ->
@@ -95,9 +127,11 @@ class FormsTagLib {
         String id = attrs.remove('id')?:name
         String value = attrs.remove('value')?:""
         String placeholder = attrs.remove('placeholder')?:""
+        String style = attrs.remove('style')?:""
+        def size = attrs.remove('size')
         boolean readonly = attrs.remove('readonly')?:false
 
-        returnVal = "<input id='${id}' value='${value}' name='${name}' placeholder='${placeholder}' class='form-control ${classes}' ${readonly?"readonly":""}/>"
+        returnVal = "<input id='${id}' value='${value}' name='${name}' placeholder='${placeholder}' class='form-control ${classes}' ${size?" size='"+size+"'":""} style='${style}' ${readonly?"readonly":""}/>"
 
         return returnVal
     }

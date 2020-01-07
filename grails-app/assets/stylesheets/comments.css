@@ -10,5 +10,8 @@
 *= require bootstrap-grid.css
 *= require bootstrap-reboot.css
 *= require multiple-select/multiple-select.min.css
+*= require jquery-ui/jquery-ui.min.css
+*= require jquery-ui/jquery-ui.structure.min.css
+*= require jquery-ui/jquery-ui.theme.min.css
 *= encoding UTF-8
 */

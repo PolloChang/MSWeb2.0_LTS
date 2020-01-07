@@ -5,12 +5,8 @@
     <meta name="layout" content="iframePage"/>
 </head>
 <body>
+
 <g:form id="search">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">${g.message(code: "page.${controllerName}.${actionName}.lable",default:'未設定properties')}-${controllerName}/${actionName}</li>
-        </ol>
-    </nav>
     <div class="container-fluid" >
         <div class="row">
             <table class="table table-bordered">
@@ -51,30 +47,42 @@
                     <td><jc:textField name="name"/></td>
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.sex.label')}</th>
                     <td>
-                        <jc:multipleSelect name="example" from="${bs.Bs101.findAllByPtype('GENDER')}" optionKey="pcode" optionValue="typedesc" noSelection="['':'---']" />
-                        <select id="object"></select>
+                        <jc:multipleSelect name="sex" from="${bs.Bs101.findAllByPtype('GENDER')}" optionKey="pcode" optionValue="typedesc" noSelection="['':'---']" />
                     </td>
                 </tr>
                 <tr>
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.birthdy.label')}</th>
-                    <td>Mark</td>
+                    <td>
+                        <jc:datepicker name="ex100.birthdy1"/>至<jc:datepicker name="ex100.birthdy2"/>
+                    </td>
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.unid.label')}</th>
                     <td><jc:numberField name="unid" /></td>
                 </tr>
                 <tr>
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.addr.label')}</th>
                     <td colspan="3">
-                        <jc:textField name="zip" />
-                        <jc:multipleSelect name="citycode" class=""
-                                       from="${bs.Bs200.getAll()}"
-                                       optionKey="code" optionValue="textShow" noSelection="['':'---']"
-                                       nextSelectId="twnspcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs201Select")}"
-                        />
-                        <jc:multipleSelect name="twnspcode" class="addrChang"
-                                       from="[[key:'',val:'---']]" optionKey="key" optionValue="val"
-                                       nextSelectId="vilgcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs202Select")}"
-                        />
-                        <jc:multipleSelect name="vilgcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
+                        <div class="form-row align-items-center">
+                            <div class="col-1"><jc:textField name="zip" placeholder="${g.message(code:  'ex100.zip.label')}" /></div>
+                            <div class="col-auto">
+                            <jc:multipleSelect name="citycode" class=""
+                                               from="${bs.Bs200.getAll()}"
+                                               optionKey="code" optionValue="textShow" noSelection="['':'---']"
+                                               nextSelectId="twnspcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs201Select")}"
+                            />
+                            </div>
+                            <div class="col-auto">
+                            <jc:multipleSelect name="twnspcode" class="addrChang"
+                                               from="[[key:'',val:'---']]" optionKey="key" optionValue="val"
+                                               nextSelectId="vilgcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs202Select")}"
+                            />
+                            </div>
+                            <div class="col-auto">
+                            <jc:multipleSelect name="vilgcode" class="addrChang" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
+                            </div>
+                            <div class="col-8">
+                                <jc:textField name="addr" placeholder="${g.message(code:  'ex100.addr.label')}" />
+                            </div>
+                        </div>
                     </td>
                 </tr>
 
@@ -95,6 +103,7 @@
         </div>
     </div>
 </g:form>
+<a id="AC" name="C" accesskey="C" href="#C" title="中間區域"> ::: </a>
 
     <!-- Modal -->
     <span id="modalSpan" />
