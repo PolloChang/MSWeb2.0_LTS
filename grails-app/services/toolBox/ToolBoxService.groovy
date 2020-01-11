@@ -41,4 +41,35 @@ class ToolBoxService {
         }
         return result
     }
+
+
+    /**
+     * 字串轉日期
+     */
+    def paramsTextDateTransform  = { attrs ->
+
+        def returnValue = [:]
+        def params = attrs.params
+        def list = attrs.list
+        def domain = attrs.domain
+        def s = (attrs.sqldate == "true" || attrs.sqldate == true)
+        params.each{ key, val ->
+            if(domain){
+                list.each{
+                    if(key=="${domain}.${it}" && val){
+                        returnValue << ["${domain}.${it}":Date.parse('yyyy-MM-dd',val.toString())]
+                    }
+                }
+            }
+            else{
+                list.each{
+                    if(key=="${it}" && val){
+                        returnValue << ["${it}":Date.parse('yyyy-MM-dd',val.toString())]
+                    }
+                }
+            }
+        }
+
+        return  returnValue
+    }
 }

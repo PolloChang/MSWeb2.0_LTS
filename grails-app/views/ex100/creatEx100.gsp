@@ -23,14 +23,14 @@ select {
         </form>
     </jc:moalBody>
     <jc:moalFooter>
-        <jc:botton type="button" class="btn btn-primary" onclick="doSave()">${g.message(code: 'default.button.save.label')}</jc:botton>
+        <jc:botton type="button" class="btn btn-primary" onclick="doInsert()">${g.message(code: 'default.button.save.label')}</jc:botton>
     </jc:moalFooter>
 </jc:modalContent>
 <script type="text/javascript">
     /**
      * 儲存
      */
-    function doSave() {
+    function doInsert() {
         jQuery.ajax({
             url:"${createLink(controller: "ex100" ,action: "doInsert")}",
             data: $('#form').serialize(),

@@ -26,7 +26,7 @@
                 <tbody>
                 <tr>
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.numbers.label')}</th>
-                    <td><jc:numberField name="numbers" readonly="true" /></td>
+                    <td><jc:numberField name="numbers" /></td>
                     <th class="table-info text-right" scope="row">${g.message(code: 'ex100.amts.label')}</th>
                     <td>
                         <jc:moneyField name="amts" />
@@ -89,27 +89,61 @@
                 </tbody>
                 <tfoot><tr><td colspan="4">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <jc:botton type="button" class="btn btn-primary">${g.message(code: 'default.button.search.label')}</jc:botton>
+                        <jc:botton type="button" class="btn btn-primary" onclick="searchFrom()">${g.message(code: 'default.button.search.label')}</jc:botton>
                         <jc:botton type="button" class="btn btn-info">${g.message(code: 'default.button.export.label')}</jc:botton>
                         <jc:botton type="button" class="btn btn-outline">${g.message(code: 'default.button.clear.label')}</jc:botton>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <jc:botton onclick="openMondal('modalSpan','${createLink(controller: "ex100", action: "creatEx100")}');" type="button" class="btn btn-success">${g.message(code: 'default.button.create.label')}</jc:botton>
+                        <jc:botton onclick="openMondal('modalSpan','${createLink(controller: "ex100", action: "creatPage")}');" type="button" class="btn btn-success">${g.message(code: 'default.button.create.label')}</jc:botton>
                     </div>
                 </td></tr></tfoot>
             </table>
         </div>
-        <div class="row">
-        </div>
+    </div>
+    <div class="m-2">
+
+        <a id="AC" name="C" accesskey="C" href="#C" title="中間區域"> ::: </a>
+        <jc:bootstrapTable id="searchTable" url="${g.createLink(controller: "ex100", action: "filter")}">
+            <th data-field="id" data-formatter="formatterEditButton">${g.message(code: 'ex100.numbers.label')}</th>
+            <th data-field="numbers">${g.message(code: 'ex100.numbers.label')}</th>
+            <th data-field="amts">${g.message(code: 'ex100.amts.label')}</th>
+            <th data-field="string">${g.message(code: 'ex100.string.label')}</th>
+            <th data-field="texts">${g.message(code: 'ex100.texts.label')}</th>
+            <th data-field="status">${g.message(code: 'ex100.status.label')}</th>
+            <th data-field="idno">${g.message(code: 'ex100.idno.label')}</th>
+            <th data-field="sex">${g.message(code: 'ex100.sex.label')}</th>
+            <th data-field="birthdy">${g.message(code: 'ex100.birthdy.label')}</th>
+            <th data-field="unid">${g.message(code: 'ex100.unid.label')}</th>
+            <th data-field="zip">${g.message(code: 'ex100.zip.label')}</th>
+            <th data-field="citycode">${g.message(code: 'ex100.citycode.label')}</th>
+            <th data-field="twnspcode">${g.message(code: 'ex100.twnspcode.label')}</th>
+            <th data-field="vilgcode">${g.message(code: 'ex100.vilgcode.label')}</th>
+            <th data-field="rode">${g.message(code: 'ex100.rode.label')}</th>
+            <th data-field="addr">${g.message(code: 'ex100.addr.label')}</th>
+        </jc:bootstrapTable>
     </div>
 </g:form>
-<a id="AC" name="C" accesskey="C" href="#C" title="中間區域"> ::: </a>
 
     <!-- Modal -->
     <span id="modalSpan" />
     </div>
 </div>
 <script type="text/javascript">
+    /**
+     * 查詢
+     */
+    function searchFrom(){
+        $('#searchTable').bootstrapTable('refresh',{
+            url: '${createLink(action: 'filter')}/?params=true&' + $('#search').serialize(),
+        });
+    }
+    
+    function formatterEditButton(value, row, index) {
+        var btnTitle ="編輯:"+row.numbers;
+        var url = "${createLink(controller:'ex100',action: "editPage")}/"+row.id;
+        var onclickFunction = "openMondal('modalSpan','"+url+"');";
+        return '<button type="button" class="btn btn-info search-edit-btn" onclick="'+onclickFunction+'"><i class="mdi mdi-edit"/> '+btnTitle+'</button>';
+    }
 </script>
 <asset:javascript src="projectJS/ex/ex.js"/>
 </body>

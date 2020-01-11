@@ -12,6 +12,8 @@
 //= require multiple-select/multiple-select.min.js
 //= require multiple-select/multiple-select-locale-all.min.js
 //= require jquery-ui/jquery-ui.min.js
+//= require bootstrap-table/bootstrap-table.min.js
+//= require bootstrap-table/bootstrap-table-locale-all.min.js"
 //= encoding UTF-8
 
 /**
@@ -52,7 +54,11 @@ function ajaxChangSelectOption(thisVal,optionId,url){
  * 開啟
  */
 function openMondal(mondalId,url){
+    console.log('57');
+    console.log('url = '+url);
     var openMondalId = mondalId+'-'+_uuid();
+
+    console.log('openMondalId = '+openMondalId);
     jQuery.ajax({
         url: url,
         data:{'modalId':openMondalId},
@@ -89,3 +95,24 @@ function _uuid() {
 $(function() {
     $('select').multipleSelect({});
 });
+
+// bootstrapTable常用
+
+/**
+ * 資料流水號
+ * @param value
+ * @param row
+ * @param index
+ * @returns {number}
+ */
+function formatterDataSerialNumber(value, row, index) {
+    return Number(index) + 1;
+}
+
+/**
+ * 總計
+ * @returns {string}
+ */
+function footerFormatterTotal(data) {
+    return '總計：'+data.length
+}

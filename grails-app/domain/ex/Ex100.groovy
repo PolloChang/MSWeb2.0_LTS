@@ -3,14 +3,14 @@ package ex
 class Ex100 {
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
     UUID id
-    int issure = 2
+    Long issure = 2
     String notes
     String		manCreated
     Date		dateCreated = new Date()
     String		manLastUpdated
     Date		lastUpdated = new Date()
-    int         numbers
-    int         amts
+    Long         numbers
+    Long         amts
     String		string
     String		texts
     String		status

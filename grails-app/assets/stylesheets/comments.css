@@ -13,5 +13,6 @@
 *= require jquery-ui/jquery-ui.min.css
 *= require jquery-ui/jquery-ui.structure.min.css
 *= require jquery-ui/jquery-ui.theme.min.css
+*= require bootstrap-table/bootstrap-table.min.css
 *= encoding UTF-8
 */
