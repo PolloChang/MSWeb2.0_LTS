@@ -5,8 +5,8 @@
   Date: 2019/4/7
   Time: 上午 09:49
 --%>
-<g:each in="${bs.BsAppList.findAllByStatusAndShowOnMenuAndActionType("5",true,"isDropdown")}" var="row" status="i">
-    <g:set var="childAppL" value="${bs.BsAppList.findAllByStatusAndShowOnMenuAndParentApp("5",true,row.appName)}" />
+<g:each in="${bs.BsAppList.findAllByStatusAndShowOnMenuAndActionType("5",true,"isDropdown",[sort:'idx',order:'asc'])}" var="row" status="i">
+    <g:set var="childAppL" value="${bs.BsAppList.findAllByStatusAndShowOnMenuAndParentApp("5",true,row.appName,[sort:'idx',order:'asc'])}" />
     <g:set var="childAppSize" value="${childAppL.size()}" />
     <g:if test="${childAppSize>0}">
         <div class="card">

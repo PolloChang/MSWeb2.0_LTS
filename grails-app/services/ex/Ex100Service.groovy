@@ -4,7 +4,6 @@ import grails.gorm.transactions.Transactional
 import grails.web.databinding.DataBinder
 import grails.web.servlet.mvc.GrailsParameterMap
 
-import java.lang.reflect.Array
 
 @Transactional
 class Ex100Service implements DataBinder {
@@ -12,11 +11,7 @@ class Ex100Service implements DataBinder {
 
     def i18nService,toolBoxService
 
-    /**
-     * 共同儲存欄位
-     */
-    ArrayList updateBindEx100Map = ['numbers', 'amts','string','status','idno','name','sex','birthdy','unid',
-                                    'zip','citycode','twnspcode','vilgcode','addr']
+
 
     def filter(GrailsParameterMap params){
         LinkedHashMap result = [:]
@@ -24,7 +19,7 @@ class Ex100Service implements DataBinder {
 
         //查詢條件集
         def searchData = [:]
-        def ex100L = []
+        def showRows = []
 
         searchData.equalIntegerLists = ['amts','numbers']
         //相等
@@ -40,7 +35,6 @@ class Ex100Service implements DataBinder {
 
         params << toolBoxService.paramsTextDateTransform(params: params,list: dateTransform)
 
-        println params
         def ex100List = Ex100.createCriteria().list(params) {
             //必要條件
             'in'("issure", ['1'.toLong(),'2'.toLong()])
@@ -105,9 +99,9 @@ class Ex100Service implements DataBinder {
             row.notes = it?.notes
             row.zip = it?.zip
             row.addrFull = it?.addrFull
-            ex100L << row
+            showRows << row
         }
-        result.rows = ex100L
+        result.rows = showRows
         return result
     }
 
@@ -118,20 +112,19 @@ class Ex100Service implements DataBinder {
      */
     def doSave(GrailsParameterMap params) {
         LinkedHashMap result = [:]
-        def fail = { Map m ->
-            result.error = [code: m.code, args: m.args]
-            return result
-        }
         Ex100 ex100I
         if(params.ex100.id){
             ex100I = Ex100.get(params.ex100.id)
+            ex100I.version = ex100I.version +1
+            ex100I.lastUpdated = new Date()
+            ex100I.manLastUpdated = '系統管理員'
         }
         else {
             ex100I = new Ex100()
         }
 
         result.bean = ex100I
-        bindData(ex100I, params["ex100"], [include: updateBindEx100Map])
+        bindData(ex100I, params["ex100"], [include:ex100I.updateBindMap])
         ex100I.manCreated = 'FWJDBA'
         ex100I.validate()
         if (ex100I.hasErrors() || !ex100I.save(flush: true)) { //失敗

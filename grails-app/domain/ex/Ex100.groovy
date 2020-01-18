@@ -96,4 +96,10 @@ class Ex100 {
         rode                (nullable:true, blank: true, maxSize: 1000)
         addr                (nullable:true, blank: true, maxSize: 1000)
     }
+
+    /**
+     * 共同儲存欄位
+     */
+    ArrayList updateBindMap = ['numbers', 'amts','string','status','idno','name','sex','birthdy','unid',
+                                    'zip','citycode','twnspcode','vilgcode','addr']
 }

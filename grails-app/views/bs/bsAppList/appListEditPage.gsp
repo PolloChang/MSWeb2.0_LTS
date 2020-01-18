@@ -6,10 +6,10 @@
     <jc:moalBody>
         <span id="activeMessage" />
         <form id="form">
-            <g:hiddenField name="ex100.id" value="${ex100I.id}" />
-            <g:hiddenField name="ex100.version" value="${ex100I.version}" />
-            <g:render template="form" model="[ex100I:ex100I,readonly:readonly]"/>
-            <g:render template='/public/upDataMessage' model='[instance: ex100I]'/>
+            <g:hiddenField name="bsAppList.id" value="${bsAppListI.id}" />
+            <g:hiddenField name="bsAppList.version" value="${bsAppListI.version}" />
+            <g:render template="bsAppList/form" model="[bsAppListI:bsAppListI,readonly:readonly]"/>
+            <g:render template='/public/upDataMessage' model='[instance: bsAppListI]'/>
         </form>
     </jc:moalBody>
     <jc:moalFooter>
@@ -22,9 +22,9 @@
      * 更新
      */
     function doUpdate() {
-        var nextPageUrl =  "${createLink(controller:'ex100',action: "editPage")}/";
+        var nextPageUrl =  "${createLink(controller:'bs',action: "appListEdit")}/";
         jQuery.ajax({
-            url:"${createLink(controller: "ex100" ,action: "doUpdate")}",
+            url:"${createLink(controller: "bs" ,action: "appListDoUpdate")}",
             data: $('#form').serialize(),
             type: "POST",
             ataType: "JSON",
@@ -47,7 +47,7 @@
      */
     function doDelete() {
         jQuery.ajax({
-            url:"${createLink(controller: "ex100" ,action: "doDelete")}",
+            url:"${createLink(controller: "bs" ,action: "appListDoDelete")}",
             data: $('#form').serialize(),
             type: "POST",
             ataType: "JSON",

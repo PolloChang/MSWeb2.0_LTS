@@ -77,6 +77,15 @@ function ajaxChangSelectOption(thisVal,optionId,url){
 }
 
 /**
+ * 查詢
+ */
+function searchFrom(searchTableId,serializeId,url){
+    jQuery(document.getElementById(searchTableId)).bootstrapTable('refresh',{
+        url: url+'/?params=true&' + jQuery(document.getElementById(serializeId)).serialize(),
+    });
+}
+
+/**
  * 開啟Modal
  * @param mondalId
  * @param url

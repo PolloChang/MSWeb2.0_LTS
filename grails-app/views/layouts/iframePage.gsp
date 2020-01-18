@@ -34,7 +34,7 @@
 <a id="AU" name="U" accesskey="U" href="#U" title="上方區域">:::</a>
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">${g.message(code: "page.${controllerName}.${actionName}.lable")}[${controllerName}/${actionName}]</li>
+        <li class="breadcrumb-item active" aria-current="page">${g.message(code: "page.${controllerName}.${actionName}.label")}[${controllerName}/${actionName}]</li>
     </ol>
 </nav>
 <g:layoutBody/>

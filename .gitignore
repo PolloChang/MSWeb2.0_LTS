@@ -28,3 +28,4 @@ out/
 /src/test/groovy/webBaseFunction/IconTagLibSpec.groovy
 BootstrapTagLibSpec.groovy
 ModalTagLibSpec.groovy
+/src/test/groovy/webBaseFunction/bootstrap
