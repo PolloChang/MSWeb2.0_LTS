@@ -5,15 +5,17 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <asset:link rel="icon" href="favicon.ico" type="image/x-ico"/>
-    <asset:stylesheet src="bootstrap.css"/>
+    %{--<asset:stylesheet src="bootstrap.css"/>--}%
+    %{--https://fezvrasta.github.io/bootstrap-material-design/--}%
+    <asset:stylesheet src="bootstrap-material-design/bootstrap-material-design.css"/>
     <asset:stylesheet src="bootstrap-grid.css"/>
     <asset:stylesheet src="bootstrap-reboot.css"/>
-    <asset:stylesheet src="comments.css"/>
     <asset:stylesheet src="multiple-select/multiple-select.min.css"/>
     <asset:stylesheet src="jquery-ui/jquery-ui.min.css"/>
     <asset:stylesheet src="jquery-ui/jquery-ui.structure.min.css"/>
     <asset:stylesheet src="jquery-ui/jquery-ui.theme.min.css"/>
     <asset:stylesheet src="bootstrap-table/bootstrap-table.min.css"/>
+    <asset:stylesheet src="comments.css"/>
     <g:layoutHead/>
 
     %{--<asset:javascript src="jquery.min.js"/>--}%

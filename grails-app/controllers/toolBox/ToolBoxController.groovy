@@ -2,11 +2,12 @@ package toolBox
 
 import grails.converters.JSON
 
+/**
+ * 工具箱
+ */
 class ToolBoxController {
 
     def toolBoxService
-
-    def index() { }
 
     /**
      * 取得鄉鎮市行政區清單
@@ -16,8 +17,8 @@ class ToolBoxController {
         def result = toolBoxService.getBs2xxSelect("Bs201",whereBs200Code)
         def exportData = []
         exportData << [text:'---',value:'']
-        result.dataBean.each{
-            exportData << [text:it?.textShow,value:it?.code]
+        result.dataBean.eachWithIndex{ value,index ->
+            exportData << [text:"${index+1}:${value?.textShow}",value:value?.code]
         }
         result.exportData = exportData
         render result as JSON
@@ -31,8 +32,8 @@ class ToolBoxController {
         def result = toolBoxService.getBs2xxSelect("Bs202",whereBs201Code)
         def exportData = []
         exportData << [text:'---',value:'']
-        result.dataBean.each{
-            exportData << [text:it?.textShow,value:it?.code]
+        result.dataBean.eachWithIndex{ value,index ->
+            exportData << [text:"${index+1}:${value?.textShow}",value:value?.code]
         }
         result.exportData = exportData
         render result as JSON

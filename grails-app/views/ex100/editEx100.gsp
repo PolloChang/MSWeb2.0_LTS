@@ -1,21 +1,10 @@
-<script>
-    $('select').multipleSelect({});
-</script>
-<style>
-select {
-    width: 50%;
-}
-.addrSelect {
-    width: 100px;
-}
-</style>
-
 <jc:modalContent id="${modalId}" static="true" ariaLabelledby="exampleModalLabel"
-                 modalDialogClass="modal-dialog-scrollable modal-xl"
+                 modalDialogClass="modal-dialog-scrollable modal-lg"
 >
-    <jc:moalHeader title="新增資料" ariaLabelledby="exampleModalLabel">
+    <jc:moalHeader title="編輯資料" ariaLabelledby="exampleModalLabel">
     </jc:moalHeader>
     <jc:moalBody>
+        <span id="activeMessage" />
         <form id="form">
             <g:hiddenField name="ex100.id" value="${ex100I.id}" />
             <g:hiddenField name="ex100.version" value="${ex100I.version}" />
@@ -32,13 +21,22 @@ select {
      * 更新
      */
     function doUpdate() {
+        var nextPageUrl =  "${createLink(controller:'ex100',action: "editPage")}/";
         jQuery.ajax({
             url:"${createLink(controller: "ex100" ,action: "doUpdate")}",
             data: $('#form').serialize(),
             type: "POST",
             ataType: "JSON",
             success: function (json) {
-
+                if(json.acrtionIsSuccess){
+                    forwardEditModeAfterDoSave('${modalId}','modalSpan',nextPageUrl+json.forWardId);
+                }
+                else{
+                    doSaveFaild('activeMessage',json.acrtionMessage);
+                }
+            },
+            beforeSend:function(){
+                doSaveBeforSend('activeMessage');
             }
         });
     }

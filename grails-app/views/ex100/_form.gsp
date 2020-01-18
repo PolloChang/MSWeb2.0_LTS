@@ -48,7 +48,7 @@
         </td>
         <th  class="table-info text-right" scope="row">${g.message(code: 'ex100.birthdy.label')}</th>
         <td>
-            <jc:datepicker name="ex100.birthdy" value="${ex100I?.birthdy}" readonly="${readonly}"/>
+            <jc:datepicker name="ex100.birthdy" value="${g.formatDate(date: ex100I?.birthdy,format: 'yyyy-MM-dd')}" readonly="${readonly}"/>
         </td>
     </tr>
     <tr>
@@ -60,18 +60,13 @@
     <tr>
         <th class="table-info text-right" scope="row">${g.message(code: 'ex100.addr.label')}</th>
         <td colspan="3">
-            <jc:textField name="ex100.zip" placeholder="${g.message(code:  'ex100.zip.label')}" style="width: 90px;display: inline-block;" />
-            <jc:multipleSelect name="ex100.citycode" class="addrSelect"
-                               from="${bs.Bs200.getAll()}"
-                               optionKey="code" optionValue="textShow" noSelection="['':'---']"
-                               nextSelectId="ex100.twnspcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs201Select")}"
+            <jc:addressSelect
+                    nameZip="ex100.zip" valueZip="${ex100I?.zip}"
+                    nameCitycode="ex100.citycode" valueCitycode="${ex100I?.citycode}"
+                    nameTwnspcode="ex100.twnspcode" valueTwnspcode="${ex100I?.twnspcode}"
+                    nameVilgcode="ex100.vilgcode" valueVilgcode="${ex100I?.vilgcode}"
+                    nameAddr="ex100.addr" valueAddr="${ex100I?.addr}"
             />
-            <jc:multipleSelect name="ex100.twnspcode" class="addrSelect"
-                               from="[[key:'',val:'---']]" optionKey="key" optionValue="val"
-                               nextSelectId="ex100.vilgcode" nextSelectUrl="${createLink(controller: "toolBox",action: "getBs202Select")}"
-            />
-            <jc:multipleSelect name="ex100.vilgcode" class="addrSelect" from="[[key:'',val:'---']]" optionKey="key" optionValue="val"/>
-            <jc:textField name="ex100.addr" placeholder="${g.message(code:  'ex100.addr.label')}" style="max-width: 400px;display: inline-block;" />
         </td>
     </tr>
     </tbody>

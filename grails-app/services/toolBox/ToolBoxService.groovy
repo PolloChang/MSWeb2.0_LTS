@@ -3,6 +3,11 @@ package toolBox
 import bs.*
 import grails.gorm.transactions.Transactional
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+import java.text.SimpleDateFormat
+import java.sql.Date
+
 @Transactional
 class ToolBoxService {
 
@@ -57,14 +62,16 @@ class ToolBoxService {
             if(domain){
                 list.each{
                     if(key=="${domain}.${it}" && val){
-                        returnValue << ["${domain}.${it}":Date.parse('yyyy-MM-dd',val.toString())]
+//                        returnValue << ["${domain}.${it}":new Date().parse('yyyy-MM-dd',val.toString())]
                     }
                 }
             }
             else{
                 list.each{
+
                     if(key=="${it}" && val){
-                        returnValue << ["${it}":Date.parse('yyyy-MM-dd',val.toString())]
+                        Date date = Date.valueOf(val.toString())
+                        returnValue << ["${it}":date]
                     }
                 }
             }
@@ -72,4 +79,21 @@ class ToolBoxService {
 
         return  returnValue
     }
+
+    /*方法1)：推薦，速度最快
+      * 利用正則表達式判斷字符串是否是數字
+      * @param str 傳入的字符串
+      * @return 是整數返回true,否則返回false
+     */
+    def boolean isNumeric(String str){
+        println 'isNumeric'
+        println str
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(str);
+        if( !isNum.matches() ){
+            return false;
+        }
+        return true;
+    }
+
 }

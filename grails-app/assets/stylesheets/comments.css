@@ -6,7 +6,7 @@
 *
 * You're free to add application-wide styles to this file and they'll appear at the top of the
 * compiled file, but it's generally better to create a new file per style scope.
-*= require bootstrap.css
+*= require bootstrap-material-design/bootstrap-material-design.css
 *= require bootstrap-grid.css
 *= require bootstrap-reboot.css
 *= require multiple-select/multiple-select.min.css
@@ -14,5 +14,6 @@
 *= require jquery-ui/jquery-ui.structure.min.css
 *= require jquery-ui/jquery-ui.theme.min.css
 *= require bootstrap-table/bootstrap-table.min.css
+*= require sweetalert2/sweetalert2.min.css
 *= encoding UTF-8
 */

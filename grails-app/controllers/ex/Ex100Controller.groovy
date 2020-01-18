@@ -2,6 +2,9 @@ package ex
 
 import grails.converters.JSON
 
+/**
+ * 範例程式
+ */
 class Ex100Controller {
 
     def ex100Service
@@ -47,6 +50,12 @@ class Ex100Controller {
      */
     def doInsert = {
         LinkedHashMap result = ex100Service.doSave(params)
+        if(!result.acrtionIsSuccess){
+            result.acrtionMessage = g.renderErrors( bean:result.bean,as:'list')
+        }
+        else{
+            result.forWardId = result.bean?.id.toString()
+        }
         render result as JSON
     }
 
@@ -55,6 +64,12 @@ class Ex100Controller {
      */
     def doUpdate = {
         LinkedHashMap result = ex100Service.doSave(params)
+        if(!result.acrtionIsSuccess){
+            result.acrtionMessage = g.renderErrors( bean:result.bean,as:'list')
+        }
+        else{
+            result.forWardId = result.bean?.id.toString()
+        }
         render result as JSON
     }
 

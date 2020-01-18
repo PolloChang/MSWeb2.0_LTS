@@ -4,22 +4,18 @@ import grails.gsp.TagLib
 import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import groovy.xml.MarkupBuilder
-import org.springframework.web.servlet.support.RequestDataValueProcessor
 import org.grails.encoder.CodecLookup
-import org.grails.core.artefact.DomainClassArtefactHandler
 import org.grails.encoder.Encoder
 import org.grails.buffer.GrailsPrintWriter
-import org.springframework.beans.factory.InitializingBean
 import org.springframework.context.ApplicationContext
-import org.springframework.context.ApplicationContextAware
-import org.springframework.context.MessageSourceResolvable
 import org.springframework.core.convert.ConversionService
-import org.springframework.web.servlet.support.RequestContextUtils
 import org.springframework.web.servlet.support.RequestDataValueProcessor
 
 @TagLib
 @Slf4j
 class FormsTagLib {
+
+    def i18nService
 
     static defaultEncodeAs = [taglib:'none']
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
@@ -128,10 +124,12 @@ class FormsTagLib {
         String value = attrs.remove('value')?:""
         String placeholder = attrs.remove('placeholder')?:""
         String style = attrs.remove('style')?:""
+        String type = attrs.type?:"text"
         def size = attrs.remove('size')
         boolean readonly = attrs.remove('readonly')?:false
+        boolean reset = attrs.remove('reset')?:false
 
-        returnVal = "<input id='${id}' value='${value}' name='${name}' placeholder='${placeholder}' class='form-control ${classes}' ${size?" size='"+size+"'":""} style='${style}' ${readonly?"readonly":""}/>"
+        returnVal = "<input id='${id}' name='${name}' value='${value}'  type='${type}' placeholder='${placeholder}' class='form-control ${reset?"reset":""} ${classes}' ${size?" size='"+size+"'":""} style='${style}' ${readonly?"readonly":""}/>"
 
         return returnVal
     }
@@ -150,29 +148,23 @@ class FormsTagLib {
 
         String id = attrs.remove('id')?:attrs.name
         String name = attrs.remove('name')
-        def value = attrs.remove('value')
+        String value = attrs.remove('value').toString()
 
-        def messageSource = grailsAttributes.getApplicationContext().getBean("messageSource")
-        def locale = RequestContextUtils.getLocale(request)
         def writer = out
         def selectClass = attrs.remove('class')
-        def from = attrs.remove('from')
+        ArrayList from = attrs.remove('from')
         boolean selectDisabled = attrs.remove('selectDisabled')?:false
         String onclick = attrs.remove("onchange")
         String onchange = attrs.remove("onchange")
         String nextSelectId = attrs.remove("nextSelectId")
         String nextSelectUrl = attrs.remove("nextSelectUrl")
 
-        def optionKey = attrs.remove('optionKey')
-        def optionDisabled = attrs.remove('optionDisabled')
-        def optionValue = attrs.remove('optionValue')
+        String optionKey = attrs.remove('optionKey')
+        String optionValue = attrs.remove('optionValue')
 
         boolean multiple = attrs.remove('multiple')
         String placeholder = attrs.remove('placeholder')
-        if (value instanceof CharSequence) {
-            value = value.toString()
-        }
-        def valueMessagePrefix = attrs.remove('valueMessagePrefix')
+
         def noSelection = attrs.remove('noSelection')
         if (noSelection != null) {
             noSelection = noSelection.entrySet().iterator().next()
@@ -185,7 +177,7 @@ class FormsTagLib {
         writer << "id='${id}' "
         writer << "name='${name}' "
 
-        writer << "class=' "
+        writer << "class=' form-control w-auto d-inline "
         if(selectClass){
             writer << selectClass
         }
@@ -212,7 +204,7 @@ class FormsTagLib {
              * 下階層選單
              */
         if(nextSelectUrl && nextSelectId){
-            writer << """onchange='ajaxChangSelectOption(\$("#${id}").multipleSelect("getSelects"),"${nextSelectId}","${nextSelectUrl}");'"""
+            writer << """onchange='ajaxChangSelectOption(this.value,"${nextSelectId}","${nextSelectUrl}");'"""
         }
 
         if(placeholder){
@@ -227,84 +219,137 @@ class FormsTagLib {
             writer.println()
         }
 
-        // create options from list
-        from.eachWithIndex {el, i ->
-            def keyDisabled
-            def keyValue
-            writer << '<option '
-            if (optionKey) {
-                def keyValueObject
-                if (optionKey instanceof Closure) {
-                    keyValue = optionKey(el)
-                }
-                else if (el != null && optionKey == 'id' && grailsApplication.getArtefact(DomainClassArtefactHandler.TYPE, el.getClass().name)) {
-                    keyValue = el.ident()
-                    keyValueObject = el
-                }
-                else {
-                    keyValue = el[optionKey]
-                    keyValueObject = el
-                }
-                if(optionDisabled) {
-                    if (optionDisabled instanceof Closure) {
-                        keyDisabled = optionDisabled(el)
-                    }
-                    else {
-                        keyDisabled = el[optionDisabled]
-                    }
-                }
-                writeValueAndCheckIfSelected(attrs.name, keyValue, value, writer, keyValueObject,keyDisabled)
-            }
-            else {
-                keyValue = el
-                writeValueAndCheckIfSelected(attrs.name, keyValue, value, writer)
-            }
-            writer << '>'
-            if (optionValue) {
-                if (optionValue instanceof Closure) {
-                    writer << optionValue(el).toString().encodeAsHTML()
-                }
-                else {
-                    writer << el[optionValue].toString().encodeAsHTML()
-                }
-            }
-            else if (el instanceof MessageSourceResolvable) {
-                writer << messageSource.getMessage(el, locale)
-            }
-            else if (valueMessagePrefix) {
-                def message = messageSource.getMessage("${valueMessagePrefix}.${keyValue}", null, null, locale)
-                if (message != null) {
-                    writer << message.encodeAsHTML()
-                }
-                else if (keyValue && keys) {
-                    def s = el.toString()
-                    if (s) writer << s.encodeAsHTML()
-                }
-                else if (keyValue) {
-                    writer << keyValue.encodeAsHTML()
-                }
-                else {
-                    def s = el.toString()
-                    if (s) writer << s.encodeAsHTML()
-                }
-            }
-            else {
-                def s = el.toString()
-                if (s) writer << s.encodeAsHTML()
-            }
-            writer << '</option>'
-            writer.println()
-        }
+        writer << optionList(from,value,optionKey,optionValue)
         // close tag
         writer << '</select>'
     }
 
-
-    void afterPropertiesSet() {
-        if (applicationContext.containsBean('requestDataValueProcessor')) {
-            requestDataValueProcessor = applicationContext.getBean('requestDataValueProcessor', RequestDataValueProcessor)
+    /**
+     * 地址連動選單
+     */
+    Closure addressSelect = { attrs ->
+        if(!attrs.nameZip && !attrs.nameCitycode && !attrs.nameTwnspcode && !attrs.nameVilgcode && !attrs.nameAddr){
+            throwTagError("Tag [addressSelect] is missing required one attribute [nameZip,nameCitycode,nameTwnspcode,nameVilgcode,nameAddr]")
         }
+        String nameZip = attrs.remove("nameZip")
+        String nameCitycode = attrs.remove("nameCitycode")
+        String nameTwnspcode = attrs.remove("nameTwnspcode")
+        String nameVilgcode = attrs.remove("nameVilgcode")
+        String nameAddr = attrs.remove("nameAddr")
+        String idZip = attrs.remove("idZip")?:nameZip
+        String idCitycode = attrs.remove("idCitycode")?:nameCitycode
+        String idTwnspcode = attrs.remove("idTwnspcode")?:nameTwnspcode
+        String idVilgcode = attrs.remove("idVilgcode")?:nameVilgcode
+        String idAddr = attrs.remove("idAddr")?:nameAddr
+        def valueZip = attrs.remove("valueZip")?:''
+        def valueCitycode = attrs.remove("valueCitycode")?:''
+        def valueTwnspcode = attrs.remove("valueTwnspcode")?:''
+        def valueVilgcode = attrs.remove("valueVilgcode")?:''
+        def valueAddr = attrs.remove("valueAddr")?:''
+        out << '<div class="form-row">'
+        if(nameZip){
+            def nameZipAttrs = [:]
+            nameZipAttrs.type = "text"
+            nameZipAttrs.id = idZip
+            nameZipAttrs.name = nameZip
+            nameZipAttrs.value = valueZip
+            nameZipAttrs.placeholder = i18nService.message(code: 'ex100.zip.label')
+            out << '<div class="col-2">'
+            out << inpitField(nameZipAttrs)
+            out << "</div>"
+        }
+
+        if(nameCitycode){
+            out << '<div class="col-auto">'
+            out << "<select id='${idCitycode}' name='${nameCitycode}' class='form-control w-auto d-inline' "
+            if(nameTwnspcode){
+                out << """onchange='ajaxChangSelectOption(this.value,"${nameTwnspcode}","${createLink(controller: "toolBox",action: "getBs201Select")}");'"""
+            }
+            out << ' >'
+            renderNoSelectionOptionImpl(out, '', '---', valueCitycode)
+            out.println()
+            out << optionList(bs.Bs200.getAll(),valueCitycode.toString(),"code","textShow")
+            out << '</select>'
+            out << "</div>"
+        }
+
+        if(nameTwnspcode){
+            out << '<div class="col-auto">'
+            out << "<select id='${idTwnspcode}' name='${nameTwnspcode}' class='form-control w-auto d-inline' "
+            if(nameVilgcode){
+                out << """onchange='ajaxChangSelectOption(this.value,"${nameVilgcode}","${createLink(controller: "toolBox",action: "getBs202Select")}");'"""
+            }
+            out << ' >'
+            renderNoSelectionOptionImpl(out, '', '---', valueTwnspcode)
+            out.println()
+            out << optionList(bs.Bs201.findAllByIssureAndBs200Code(2,valueCitycode.toString()),valueTwnspcode.toString(),"code","textShow")
+            out << '</select>'
+            out << "</div>"
+        }
+
+        if(nameVilgcode){
+            out << '<div class="col-auto">'
+            out << "<select id='${idVilgcode}' name='${nameVilgcode}' class='form-control w-auto d-inline' "
+            out << ' >'
+            renderNoSelectionOptionImpl(out, '', '---', valueVilgcode)
+            out.println()
+            out << optionList(bs.Bs202.findAllByIssureAndBs201Code(2,valueTwnspcode.toString()),valueVilgcode.toString(),"code","textShow")
+            out << '</select>'
+            out << "</div>"
+        }
+
+        if(nameAddr){
+            attrs.type = "text"
+            attrs.id = idAddr
+            attrs.name = nameAddr
+            attrs.value = valueAddr
+            attrs.class = "w-100 d-inline"
+            attrs.placeholder = i18nService.message(code: 'ex100.addr.label')
+            out << '<div class="col-5">'
+            out << inpitField(attrs)
+            out << "</div>"
+        }
+        out << "</div>"
     }
+
+    /**
+     *
+     * @param from
+     * @param value
+     * @param optionKey
+     * @param optionValue
+     * @return option清單
+     */
+    private String optionList(ArrayList from,String value,String optionKey,String optionValue){
+        StringBuffer returnValue = new StringBuffer()
+
+        // create options from list
+        from.eachWithIndex {el, i ->
+            def keyValue = el[optionKey]
+            def text = el[optionValue]
+            boolean selected
+            returnValue.append('<option ')
+            returnValue.append(" value='${keyValue}'' ")
+
+            selected = value.equals(keyValue.toString())
+
+            if(selected){
+                returnValue.append("selected")
+            }
+            returnValue.append(' >')
+            if(!keyValue.equals('')){
+                returnValue.append("${i+1}.${text}")
+            }
+            else{
+                returnValue.append("${text}")
+            }
+
+            returnValue.append('</option>')
+        }
+
+        return returnValue.toString()
+    }
+
 
     @CompileStatic
     private void outputNameAsIdIfIdDoesNotExist(Map attrs, GrailsPrintWriter out) {
@@ -358,62 +403,17 @@ class FormsTagLib {
         }
     }
 
-
+    /**
+     * 未選擇選項
+     * @param out
+     * @param noSelectionKey
+     * @param noSelectionValue
+     * @param value
+     * @return
+     */
     def renderNoSelectionOptionImpl(out, noSelectionKey, noSelectionValue, value) {
         // If a label for the '--Please choose--' first item is supplied, write it out
         out << "<option value=\"${(noSelectionKey == null ? '' : noSelectionKey)}\"${noSelectionKey == value ? ' selected="selected"' : ''}>${noSelectionValue.encodeAsHTML()}</option>"
-    }
-
-    private void writeValueAndCheckIfSelected(selectName, keyValue, value, writer) {
-        writeValueAndCheckIfSelected(selectName, keyValue, value, writer, null)
-    }
-    private void writeValueAndCheckIfSelected(selectName, keyValue, value, writer, el) {
-        writeValueAndCheckIfSelected(selectName, keyValue, value, writer, el, null)
-    }
-
-    private void writeValueAndCheckIfSelected(selectName, keyValue, value, writer, el, keyDisabled) {
-
-        boolean selected = false
-        def keyClass = keyValue?.getClass()
-        if (keyClass.isInstance(value)) {
-            selected = (keyValue == value)
-        }
-        else if (value instanceof Collection) {
-            // first try keyValue
-            selected = value.contains(keyValue)
-            if (!selected && el != null) {
-                selected = value.contains(el)
-            }
-        }
-        // GRAILS-3596: Make use of Groovy truth to handle GString <-> String
-        // and other equivalent types (such as numbers, Integer <-> Long etc.).
-        else if (keyValue == value) {
-            selected = true
-        }
-        else if (keyClass && value != null) {
-            try {
-                value = conversionService.convert(value, keyClass)
-                selected = keyValue == value
-            }
-            catch (e) {
-                // ignore
-            }
-        }
-        keyValue = processFormFieldValueIfNecessary(selectName, "${keyValue}","option")
-        writer << "value=\"${keyValue}\" "
-        if (selected) {
-            writer << 'selected="selected" '
-        }
-        if(keyDisabled && !selected) {
-            writer << 'disabled="disabled" '
-        }
-    }
-
-    private processFormFieldValueIfNecessary(name, value, type) {
-        if (requestDataValueProcessor != null) {
-            value = requestDataValueProcessor.processFormFieldValue(request, name, "${value}", type)
-        }
-        return value
     }
 
 }
