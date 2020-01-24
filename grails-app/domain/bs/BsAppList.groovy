@@ -50,7 +50,6 @@ class BsAppList {
 
 
     static constraints = {
-        id   				(nullable:false, blank: false)
         issure				(nullable:false, blank: false)
         notes				(nullable:true, maxSize: 1000)
         dateCreated			(nullable:false, blank: false)
@@ -71,4 +70,12 @@ class BsAppList {
      * 共同儲存欄位
      */
     ArrayList updateBindMap = ['appName','parentApp','appCname','appCnameI18n','status','controller','action','idx','actionType','showOnMenu']
+
+    def beforeInsert() {
+        dateCreated = new Date()
+        manCreated = '系統管理員'
+    }
+
+    def beforeUpdate(){
+    }
 }

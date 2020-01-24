@@ -73,11 +73,11 @@ class BsService implements DataBinder {
          }
          else {
              bsAppListI = new BsAppList()
+             bsAppListI.beforeInsert()
          }
 
          result.bean = bsAppListI
          bindData(bsAppListI, params["bsAppList"], [include: bsAppListI.updateBindMap])
-         bsAppListI.manCreated = 'FWJDBA'
          bsAppListI.validate()
          if (bsAppListI.hasErrors() || !bsAppListI.save(flush: true)) { //失敗
              def errorColumn = []
