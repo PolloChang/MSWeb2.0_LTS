@@ -2,7 +2,8 @@ package bs
 
 class BsHolday {
 
-    Long		id
+    static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
+    UUID        id
     String		name
     String		place
     Long		vactionType
@@ -18,16 +19,16 @@ class BsHolday {
         table 'BS_HOLDAY'
         comment '節日表'
         version true
-        id					column:"ID",				comment:"ID"
-        name				column:"NAME",				comment:"節慶名稱"
-        place				column:"PLACE",				comment:"地方/國家"
-        vactionType			column:"VACTION_TYPE",		comment:"放假"
-        issure				column:"ISSURE",			comment:"資料狀態"
-        notes				column:"NOTES",				comment:"資料註記"
-        creatdate			column:"CREATDATE",			comment:"資料建立時間"
-        creator				column:"CREATOR",			comment:"資料建立者"
-        updt				column:"UPDT",				comment:"資料更新時間"
-        upator				column:"UPATOR",			comment:"資料更新者"
+        id					column:"UUID",generator: "uuid2", type: "uuid-binary", length: 16
+        name				column:"NAME",				        comment:"節慶名稱"
+        place				column:"PLACE",				        comment:"地方/國家"
+        vactionType			column:"VACTION_TYPE",		        comment:"放假"
+        issure				column:"ISSURE",			        comment:"資料狀態"
+        notes				column:"NOTES",				        comment:"資料註記"
+        dateCreated			column:"DATE_CREATED",		        comment:"資料建立時間"
+        manCreated			column:"MAN_CREATED",		        comment:"資料建立者"
+        lastUpdated			column:"LAST_UPDATED",		        comment:"資料更新人"
+        manLastUpdated		column:"MAN_LAST_UPDATED",	        comment:"資料更新者"
     }
 
 

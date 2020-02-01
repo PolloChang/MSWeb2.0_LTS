@@ -2,7 +2,8 @@ package bs
 
 class BsI18 {
 
-    Long		id
+    static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
+    UUID        id
     Integer		issure = 2
     String		notes
     Date		creatdate
@@ -19,13 +20,13 @@ class BsI18 {
         table 'BS_I18'
         comment 'bs_i18'
         version true
-        id					column:"ID",				comment:"ID"
+        iid					column:"UUID",generator: "uuid2", type: "uuid-binary", length: 16
         issure				column:"ISSURE",			comment:"資料狀態"
         notes				column:"NOTES",				comment:"資料註記"
-        creatdate			column:"CREATDATE",			comment:"資料建立時間"
-        creator				column:"CREATOR",			comment:"資料建立者"
-        updt				column:"UPDT",				comment:"資料更新時間"
-        upator				column:"UPATOR",			comment:"資料更新者"
+        dateCreated			column:"DATE_CREATED",		comment:"資料建立時間"
+        manCreated			column:"MAN_CREATED",		comment:"資料建立者"
+        lastUpdated			column:"LAST_UPDATED",		comment:"資料更新人"
+        manLastUpdated		column:"MAN_LAST_UPDATED",	comment:"資料更新者"
         langCultureName		column:"LANG_CULTURE_NAME",	comment:"語言文化名稱"
         displayName			column:"DISPLAY_NAME",		comment:"顯示名稱"
         languageFamily		column:"LANGUAGE_FAMILY",	comment:"語系"

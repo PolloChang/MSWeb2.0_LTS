@@ -109,16 +109,16 @@ environments:
     development:
         dataSource:
             dbCreate: none
-            url: jdbc:mariadb://localhost:3306/fwjdba
+            url: jdbc:mariadb://localhost:3306/fwjdb
     test:
         dataSource:
             dbCreate: none
-            url: jdbc:mariadb://localhost:3306/fwjdba
+            url: jdbc:mariadb://localhost:3306/fwjdb
 
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:mariadb://localhost:3306/fwjdba
+            url: jdbc:mariadb://localhost:3306/fwjdb
             properties:
                 jmxEnabled: true
                 initialSize: 5

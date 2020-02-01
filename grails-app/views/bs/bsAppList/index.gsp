@@ -39,7 +39,9 @@
                     </td>
                     <th class="table-info text-right" scope="row">${g.message(code: 'bsAppList.showOnMenu.label')}</th>
                     <td colspan="1">
-                        <jc:multipleSelect name="showOnMenu" from="${bs.Bs101.findAllByPtype('APP_LIST_SHOW_ON_MENU')}" optionKey="pcode" optionValue="typedesc" noSelection="['':'---']" />
+                        <jc:multipleSelect name="showOnMenu" from="[
+                                [key:'false',val:'不顯示'],[key:'true',val:'顯示']
+                        ]" noSelection="['':'---']" optionKey="key" optionValue="val"/>
                     </td>
                 </tr>
                 <tr>
