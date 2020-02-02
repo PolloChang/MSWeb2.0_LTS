@@ -20,12 +20,28 @@
 <g:set var="appItem" value="${bs.BsAppList.findByControllerAndAction(controllerName,actionName)}" />
 <body>
 <a id="AU" name="U" accesskey="U" href="#U" title="上方區域">:::</a>
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb" style="display: inline-block;width: 90%">
-        <li class="breadcrumb-item active" aria-current="page">${g.message(code: "page.${controllerName}.${actionName}.label")}[${controllerName}/${actionName}]</li>
-    </ol>
-    <button type="button" onclick="parent.closeApp('${appItem.id.toString()}')" class="btn btn-link float-right">關閉程式</button>
-</nav>
-<g:layoutBody/>
+<div class="row border-bottom">
+    <nav aria-label="breadcrumb" class="col-10">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">${g.message(code: "page.${controllerName}.${actionName}.label")}[${controllerName}/${actionName}]</li>
+        </ol>
+    </nav>
+    <div class="btn-group dropup col-ato">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
+                已開啟頁面
+            </button>
+            <div id="dropdownMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a onclick="changContent('','content-main');" class="dropdown-item" href="#">查詢畫面</a>
+            </div>
+        </div>
+        <button type="button" onclick="parent.closeApp('${appItem.id.toString()}')" class="btn btn-link">關閉程式</button>
+    </div>
+</div>
+<div id="content-parent">
+    <div id="content-main">
+        <g:layoutBody/>
+    </div>
+</div>
 </body>
 </html>

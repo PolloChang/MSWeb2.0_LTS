@@ -12,7 +12,7 @@
         </form>
     </jc:moalBody>
     <jc:moalFooter>
-        <jc:botton type="button" class="btn btn-primary" onclick="doInsert()">${g.message(code: 'default.button.save.label')}</jc:botton>
+        <jc:bottom type="button" class="btn btn-primary" onclick="doInsert()">${g.message(code: 'default.button.save.label')}</jc:bottom>
     </jc:moalFooter>
 </jc:modalContent>
 <script type="text/javascript">

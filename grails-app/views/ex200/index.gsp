@@ -1,3 +1,9 @@
+<%--
+  Created by JamesChang
+  Date/檔案建立日期: 2020/2/2
+  Time/檔案建立時間: 下午 12:13
+  File Description/檔案描述:
+--%>
 <%@ page import="bs.Bs101" %>
 <!doctype html>
 <html>
@@ -91,12 +97,12 @@
                 </tbody>
                 <tfoot><tr><td colspan="4">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <jc:bottom type="button" class="btn btn-outline-primary" onclick="searchFrom()">${g.message(code: 'default.button.search.label')}</jc:bottom>
+                        <jc:bottom type="button" class="btn btn-outline-primary" onclick="searchFrom('searchTable','search','${createLink(action: 'filter')}')">${g.message(code: 'default.button.search.label')}</jc:bottom>
                         <jc:bottom type="button" class="btn btn-outline-info">${g.message(code: 'default.button.export.label')}</jc:bottom>
                         <jc:bottom type="button" class="btn btn-outline" onclick="clearFrom()">${g.message(code: 'default.button.clear.label')}</jc:bottom>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <jc:bottom onclick="openMondal('modalSpan','${createLink(controller: "ex100", action: "creatPage")}');"  type="button" class="btn btn-outline-success">${g.message(code: 'default.button.create.label')}</jc:bottom>
+                        <jc:bottom onclick="changContent('${createLink(controller: "ex200", action: "creatPage")}/creat-data','creat-data');"  type="button" class="btn btn-outline-success">${g.message(code: 'default.button.create.label')}</jc:bottom>
                     </div>
                 </td></tr></tfoot>
             </table>
@@ -124,17 +130,7 @@
 
 <!-- Modal -->
 <span id="modalSpan" />
-</div>
-</div>
 <script type="text/javascript">
-    /**
-     * 查詢
-     */
-    function searchFrom(){
-        $('#searchTable').bootstrapTable('refresh',{
-            url: '${createLink(action: 'filter')}/?params=true&' + $('#search').serialize(),
-        });
-    }
 
     /**
      * 編輯按鈕

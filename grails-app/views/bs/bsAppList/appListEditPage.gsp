@@ -13,8 +13,8 @@
         </form>
     </jc:moalBody>
     <jc:moalFooter>
-        <jc:botton type="button" class="btn btn-primary" onclick="doUpdate()">${g.message(code: 'default.button.save.label')}</jc:botton>
-        <jc:botton type="button" class="btn btn-danger" onclick="doDelete()">${g.message(code: 'default.button.delete.label')}</jc:botton>
+        <jc:bottom type="button" class="btn btn-primary" onclick="doUpdate()">${g.message(code: 'default.button.save.label')}</jc:bottom>
+        <jc:bottom type="button" class="btn btn-danger" onclick="doDelete()">${g.message(code: 'default.button.delete.label')}</jc:bottom>
     </jc:moalFooter>
 </jc:modalContent>
 <script type="text/javascript">

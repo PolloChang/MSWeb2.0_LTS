@@ -67,12 +67,12 @@
                 </tbody>
                 <tfoot><tr><td colspan="4">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <jc:botton type="button" class="btn btn-outline-primary" onclick="searchFrom('searchTable','search','${createLink(action: 'appListFilter')}')">${g.message(code: 'default.button.search.label')}</jc:botton>
-                        <jc:botton type="button" class="btn btn-outline-info">${g.message(code: 'default.button.export.label')}</jc:botton>
-                        <jc:botton type="button" class="btn btn-outline" onclick="clearFrom()">${g.message(code: 'default.button.clear.label')}</jc:botton>
+                        <jc:bottom type="button" class="btn btn-outline-primary" onclick="searchFrom('searchTable','search','${createLink(action: 'appListFilter')}')">${g.message(code: 'default.button.search.label')}</jc:bottom>
+                        <jc:bottom type="button" class="btn btn-outline-info">${g.message(code: 'default.button.export.label')}</jc:bottom>
+                        <jc:bottom type="button" class="btn btn-outline" onclick="clearFrom()">${g.message(code: 'default.button.clear.label')}</jc:bottom>
                     </div>
                     <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <jc:botton onclick="openMondal('modalSpan','${createLink(controller: "bs", action: "appListCreat")}');"  type="button" class="btn btn-outline-success">${g.message(code: 'default.button.create.label')}</jc:botton>
+                        <jc:bottom onclick="openMondal('modalSpan','${createLink(controller: "bs", action: "appListCreat")}');"  type="button" class="btn btn-outline-success">${g.message(code: 'default.button.create.label')}</jc:bottom>
                     </div>
                 </td></tr></tfoot>
             </table>

@@ -29,7 +29,7 @@ class FormsTagLib {
     /**
      * 直接產生紐物件
      */
-    Closure botton = { attrs, body ->
+    Closure bottom = { attrs, body ->
         StringWriter output = new StringWriter()
         MarkupBuilder builder = new MarkupBuilder(output)
         builder.button(attrs) {

@@ -58,7 +58,6 @@ function changeIframeMain(srcValue,changId){
         var tab = jQuery(document.createElement("div"));
         var tabIframe = jQuery(document.createElement("iframe"));
         tabIframe.attr("id","ifrom-data-"+changId);
-        tabIframe.attr("src",srcValue);
         tabIframe.attr("style","width:100%;height: 1080px");
         tabIframe.attr("frameborder","0");
         tabIframe.attr("src",srcValue);
@@ -80,6 +79,54 @@ function closeApp(appId) {
         var tabsParent = jQuery(document.getElementById('tabs-parent').firstElementChild);
         tabsParent.attr("style",'display:block;');
     }
+}
+
+/**
+ * 切換程式的畫面內容
+ * @param url
+ * @param contentId
+ */
+function changContent(url,contentId) {
+    var contentParent = jQuery(document.getElementById('content-parent'));
+    contentParent.children('div').attr("style",'display:none;');
+    var changItem = jQuery(document.getElementById(contentId));
+    if(changItem.length){
+        changItem.attr("style",'display:block;');
+    }
+    else{
+        var contentDiv = jQuery(document.createElement("div"));
+        var contentIframe = jQuery(document.createElement("iframe"));
+        contentIframe.attr('id','content-iframe-'+contentId);
+        contentIframe.attr("style","width:100%;height: 1080px");
+        contentIframe.attr("frameborder","0");
+        contentIframe.attr("src",url);
+        contentDiv.append(contentIframe);
+        contentDiv.attr("id",contentId);
+        contentDiv.attr("style",'display:block;');
+        contentParent.prepend(contentDiv);
+
+        var dropdownMenu = jQuery(document.getElementById('dropdownMenu'));
+        var dropdownMenua = jQuery(document.createElement("a"));
+        dropdownMenua.attr('onclick','changContent("","'+contentId+'");');
+        dropdownMenua.attr("class",'dropdown-item');
+        dropdownMenua.attr("href",'#');
+        dropdownMenua.text('新增');
+        dropdownMenua.attr("id",'dropdownMenua-'+contentId);
+        dropdownMenu.append(dropdownMenua);
+    }
+}
+
+/**
+ * 關閉程式的畫面內容
+ * @param contentId
+ */
+function closeContent(contentId) {
+    var dropdownMenua = jQuery(document.getElementById('dropdownMenua-'+contentId));
+    var contentDiv = jQuery(document.getElementById(contentId));
+    dropdownMenua.remove();
+    contentDiv.remove();
+    var dropdownMenu = jQuery(document.getElementById('content-parent').firstElementChild);
+    dropdownMenu.attr("style",'display:block;');
 }
 
 /**
