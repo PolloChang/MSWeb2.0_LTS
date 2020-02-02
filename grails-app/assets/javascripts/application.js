@@ -42,11 +42,44 @@ Date.prototype.Format = function (fmt) { //author: meizz
 }
 
 /**
- * 切換iframe
+ * 切換iframe2.0
+ * @param srcValue
+ * @param changId
  */
-function changeIframeMain(srcValue){
-    $("#ifromDataMain").attr("src",srcValue);
-    $('#myTab li:last-child a').tab('show');
+function changeIframeMain(srcValue,changId){
+    var tabsParent = jQuery(document.getElementById('tabs-parent'));
+    var changItem = jQuery(document.getElementById("selecter-content-"+changId));
+    tabsParent.children('div').attr("style",'display:none;');
+    if(changItem.length){ //判斷有元素
+        var tab = jQuery(document.getElementById("selecter-content-"+changId));
+        tab.attr("style",'display:block;');
+    }
+    else{
+        var tab = jQuery(document.createElement("div"));
+        var tabIframe = jQuery(document.createElement("iframe"));
+        tabIframe.attr("id","ifrom-data-"+changId);
+        tabIframe.attr("src",srcValue);
+        tabIframe.attr("style","width:100%;height: 1080px");
+        tabIframe.attr("frameborder","0");
+        tabIframe.attr("src",srcValue);
+        tab.append(tabIframe);
+        tab.attr("id","selecter-content-"+changId);
+        tab.attr("style",'display:block;');
+        tabsParent.prepend(tab);
+    }
+}
+
+/**
+ * 關閉程式
+ * @param appId
+ */
+function closeApp(appId) {
+    var changItem = jQuery(document.getElementById("selecter-content-"+appId));
+    if(changItem.length) { //判斷有元素
+        changItem.remove();
+        var tabsParent = jQuery(document.getElementById('tabs-parent').firstElementChild);
+        tabsParent.attr("style",'display:block;');
+    }
 }
 
 /**
