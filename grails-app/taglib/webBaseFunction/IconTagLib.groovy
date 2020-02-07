@@ -60,6 +60,11 @@ class IconTagLib {
             case "add":
                 writer << "<circle cx='12' cy='12' r='10'></circle><line x1='12' y1='8' x2='12' y2='16'></line><line x1='8' y1='12' x2='16' y2='12'></line>"
                 break
+            //儲存
+            case "save":
+                writer << '<path xmlns="http://www.w3.org/2000/svg" d="M0 0h24v24H0z" fill="none"/>'
+                writer << '<path xmlns="http://www.w3.org/2000/svg" d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/>'
+                break
             //儀錶板
             case "dashboard":
                 writer << "<path d='M0 0h24v24H0z' fill='none'/><path d='M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z'/>"

@@ -6,11 +6,6 @@
         <col width="30%">
     </colgroup>
     <thead>
-    <tr class="bg-info">
-        <th colspan="4">
-            <icon:svg iconType="add" message="${g.message(code: 'page.default.creat.label')}"/>
-        </th>
-    </tr>
     </thead>
     <tbody>
     <tr>

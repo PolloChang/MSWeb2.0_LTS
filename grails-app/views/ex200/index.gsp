@@ -141,8 +141,8 @@
      */
     function formatterEditButton(value, row, index) {
         var btnTitle ="編輯:"+row.numbers;
-        var url = "${createLink(controller:'ex100',action: "editPage")}/"+row.id;
-        var onclickFunction = "openMondal('modalSpan','"+url+"');";
+        var url = "${createLink(controller:'ex200',action: "editPage")}/"+row.id;
+        var onclickFunction = "changContent('"+url+"','"+row.id+"');";
         return '<button type="button" class="btn btn-info search-edit-btn" onclick="'+onclickFunction+'"><i class="mdi mdi-edit"/> '+btnTitle+'</button>';
     }
 </script>

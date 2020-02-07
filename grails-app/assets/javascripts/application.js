@@ -17,6 +17,14 @@
 //= encoding UTF-8
 
 /**
+ * 參數宣告
+ * @type {string}
+ */
+var dataSaveSuccess = '資料儲存成功';
+var dataDeleteSuccess = '資料刪除成功';
+
+
+/**
  * JS擴充:DateFormat
  * 對Date的擴充套件，將 Date 轉化為指定格式的String
  * 月(M)、日(d)、小時(h)、分(m)、秒(s)、季度(q) 可以用 1-2 個佔位符，
@@ -193,7 +201,7 @@ function openMondal(mondalId,url){
 function forwardEditModeAfterDoSave(closeModalId,openModalId,forwardURL) {
     jQuery(document.getElementById(closeModalId)).modal('hide');
     Swal.fire({
-        title: 'Your work has been saved',
+        title: dataSaveSuccess,
         icon: 'success',
         position:'top',
         showConfirmButton: false,
@@ -201,6 +209,41 @@ function forwardEditModeAfterDoSave(closeModalId,openModalId,forwardURL) {
     }).then((result) => {
         openMondal(openModalId,forwardURL);
     });
+}
+
+/**
+ * 頁面完成儲存的動作
+ * @param closeId
+ * @param openId
+ * @param forwardURL
+ */
+function forwardEditPageAfterDoSave(closeId,openId,forwardURL) {
+    closeContent(closeId);
+    Swal.fire({
+        title: dataSaveSuccess,
+        icon: 'success',
+        position:'top',
+        showConfirmButton: false,
+        timer: 1500
+    }).then((result) => {
+        changContent(forwardURL,openId);
+    });
+}
+
+/**
+ * 頁面刪除資料後的動作
+ * @param closeId
+ */
+function forwardEditPageAfterDoDelete(closeId) {
+    Swal.fire({
+        title: dataDeleteSuccess,
+        icon: 'success',
+        position:'top',
+        showConfirmButton: false,
+        timer: 1500
+    }).then((result) => {
+        parent.closeContent(closeId);
+});
 }
 
 /**
