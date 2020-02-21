@@ -50,7 +50,6 @@ class Ex200Controller {
         else{
             result.forWardId = result.bean?.id.toString()
         }
-        println result.acrtionIsSuccess
         render result as JSON
 
     }

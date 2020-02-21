@@ -12,7 +12,7 @@
 <body>
 <div class="row">
     <div class="col-11">
-        <icon:svg iconType="cube" message="編輯資料"/>
+        <icon:svg iconType="cube" message="${message(code: 'system.editPage.header.title.label')}"/>
     </div>
     <div class="col-1">
         <jc:bottom type="button" class="btn btn-primary" onclick="parent.closeContent('${pageId}');">關閉頁面 <icon:svg iconType="close"/></jc:bottom>
@@ -27,6 +27,7 @@
             <g:hiddenField name="ex100.id" value="${ex100I.id}" />
             <g:hiddenField name="ex100.version" value="${ex100I.version}" />
             <g:render template="/ex100/form" model="[ex100I:ex100I,readonly:readonly]"/>
+            <g:render template='/public/upDataMessage' model='[instance: ex100I]'/>
             <div class="border-top">
                 <jc:bottom type="button" class="btn btn-primary" onclick="doUpdate()">${g.message(code: 'default.button.save.label')}</jc:bottom>
                 <jc:bottom type="button" class="btn btn-danger" onclick="doDelete()">${g.message(code: 'default.button.delete.label')}</jc:bottom>

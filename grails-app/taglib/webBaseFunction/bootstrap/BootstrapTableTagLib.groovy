@@ -44,7 +44,7 @@ class BootstrapTableTagLib {
         if(dataClickToSelect){
             out << '<th data-field="state" data-checkbox="true"></th>'
         }
-        out << '<th data-formatter="formatterDataSerialNumber" data-align="center" data-footer-formatter="footerFormatterTotal">#</th>'
+        out << '<th data-formatter="formatterDataSerialNumber" data-align="center" data-width="30"  data-footer-formatter="footerFormatterTotal">#</th>'
         out << body()
         out << '</tr></thead>'
         out << "</table>"

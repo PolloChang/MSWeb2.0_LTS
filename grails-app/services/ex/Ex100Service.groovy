@@ -12,7 +12,11 @@ class Ex100Service implements DataBinder {
     def i18nService,toolBoxService
 
 
-
+    /**
+     * 查詢
+     * @param params
+     * @return  result[Map]
+     */
     def filter(GrailsParameterMap params){
         LinkedHashMap result = [:]
         def dateTransform = []
@@ -108,7 +112,7 @@ class Ex100Service implements DataBinder {
     /**
      * 儲存資料
      * @param params
-     * @return
+     * @return result[LinkedHashMap]
      */
     def doSave(GrailsParameterMap params) {
         LinkedHashMap result = [:]
@@ -121,11 +125,11 @@ class Ex100Service implements DataBinder {
         }
         else {
             ex100I = new Ex100()
+            ex100I.manCreated = '系統管理員'
         }
 
         result.bean = ex100I
         bindData(ex100I, params["ex100"], [include:ex100I.updateBindMap])
-        ex100I.manCreated = 'FWJDBA'
         ex100I.validate()
         if (ex100I.hasErrors() || !ex100I.save(flush: true)) { //失敗
             def errorColumn = []

@@ -96,4 +96,34 @@ class ToolBoxService {
         return true;
     }
 
+    /**
+     * 資料新增前處理
+     * @param domain 原domain
+     * @param domainI 新domain
+     * @return  domainI [domain]
+     */
+    def beforeInsert(def domain,def domainI){
+        domainI = domain
+        domainI.version = 0
+        domainI.dateCreated = new java.util.Date()
+        domainI.manCreated = '系統管理員'
+
+        return domainI
+    }
+
+    /**
+     * 資料更新前處理
+     * @param domain 原domain
+     * @param domainI 新domain
+     * @return  domainI [domain]
+     */
+    def beforeUpdate(def domain,def domainI){
+        domainI = domain
+        domainI.version = domain.version +1
+        domainI.lastUpdated = new java.util.Date()
+        domainI.manLastUpdated = '系統管理員'
+
+        return domainI
+    }
+
 }

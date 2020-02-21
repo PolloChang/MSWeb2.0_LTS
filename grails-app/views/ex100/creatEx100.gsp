@@ -1,7 +1,7 @@
 <jc:modalContent id="${modalId}" static="true" ariaLabelledby="exampleModalLabel"
                  modalDialogClass="modal-dialog-scrollable modal-lg"
 >
-    <jc:moalHeader title="新增資料" ariaLabelledby="exampleModalLabel">
+    <jc:moalHeader title="${g.message(code: 'page.default.creat.label')}" ariaLabelledby="exampleModalLabel">
     </jc:moalHeader>
     <jc:moalBody>
         <span id="activeMessage" />

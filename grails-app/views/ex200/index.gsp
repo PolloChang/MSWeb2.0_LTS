@@ -111,7 +111,7 @@
 </form>
 <div class="m-2">
 
-    <a id="AC" name="C" accesskey="C" href="#C" title="中間區域"> ::: </a>
+    <a id="AC" name="C" accesskey="C" href="#C" title="${message(code: 'system.free.center.label')}"> ::: </a>
     <jc:bootstrapTable id="searchTable" url="${g.createLink(controller: "ex100", action: "filter")}">
         <th data-field="id" data-formatter="formatterEditButton">${g.message(code: 'ex100.numbers.label')}</th>
         <th data-field="numbers" data-formatter="formatterNumber">${g.message(code: 'ex100.numbers.label')}</th>

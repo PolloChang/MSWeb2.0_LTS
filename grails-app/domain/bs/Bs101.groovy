@@ -49,7 +49,6 @@ class Bs101 {
 
 
     static constraints = {
-        id					(nullable:false, blank: false)
         pcode				(nullable:false, blank: false)
         ptype				(nullable:false, blank: false, maxSize: 20)
         typedesc			(nullable:true, maxSize: 100)
@@ -67,4 +66,14 @@ class Bs101 {
         exceptionInt2       (nullable:true)
         exceptionInt3       (nullable:true)
     }
+
+
+    /**
+         * 共同儲存欄位
+         */
+    ArrayList updateBindMap = [
+            'typedesc','idx',
+            'exceptionString1','exceptionString2','exceptionString3',
+            'exceptionInt1','exceptionInt2','exceptionInt3'
+    ]
 }

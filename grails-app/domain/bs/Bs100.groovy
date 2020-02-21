@@ -33,7 +33,6 @@ class Bs100 {
 
 
     static constraints = {
-        id					(nullable:false, blank: false)
         systype				(nullable:false, blank: false, maxSize: 20)
         ptype				(nullable:false, blank: false, maxSize: 20)
         typedesc			(nullable:false, blank: false, maxSize: 100)
@@ -44,4 +43,9 @@ class Bs100 {
         lastUpdated			(nullable:true)
         manLastUpdated		(nullable:true, maxSize: 200)
     }
+
+    /**
+     * 共同儲存欄位
+     */
+    ArrayList updateBindMap = ['typedesc']
 }

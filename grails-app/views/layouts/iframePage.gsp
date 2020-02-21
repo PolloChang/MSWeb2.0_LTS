@@ -19,7 +19,7 @@
 </head>
 <g:set var="appItem" value="${bs.BsAppList.findByControllerAndAction(controllerName,actionName)}" />
 <body>
-<a id="AU" name="U" accesskey="U" href="#U" title="上方區域">:::</a>
+<a id="AU" name="U" accesskey="U" href="#U" title="${message(code: 'system.free.up.label')}">:::</a>
 <div class="row border-bottom">
     <nav aria-label="breadcrumb" class="col-10">
         <ol class="breadcrumb">
@@ -29,13 +29,13 @@
     <div class="btn-group dropup col-ato">
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true">
-                已開啟頁面
+                ${message(code: 'system.contentPage.header.select.label')}
             </button>
             <div id="dropdownMenu" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a onclick="changContent('','content-main');" class="dropdown-item" href="#">查詢畫面</a>
+                <a onclick="changContent('','content-main');" class="dropdown-item" href="#">${message(code: 'system.contentPage.header.select.first.label')}</a>
             </div>
         </div>
-        <button type="button" onclick="parent.closeApp('${appItem.id.toString()}')" class="btn btn-link">關閉程式</button>
+        <button type="button" onclick="parent.closeApp('${appItem.id.toString()}')" class="btn btn-link">${message(code: 'system.contentPage.header.closeApp.label')}</button>
     </div>
 </div>
 <div id="content-parent">

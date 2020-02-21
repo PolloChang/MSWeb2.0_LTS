@@ -36,6 +36,8 @@ class Ex100 {
 
     static mapping = {
 
+
+        dynamicInsert true
         table 'EX100'
         comment '資料範例'
         version true
