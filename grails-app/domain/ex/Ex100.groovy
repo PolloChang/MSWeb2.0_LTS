@@ -1,5 +1,10 @@
 package ex
 
+/**
+ * 資料範例
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 class Ex100 {
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
     UUID id

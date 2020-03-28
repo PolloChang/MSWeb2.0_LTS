@@ -4,6 +4,13 @@ import grails.gorm.transactions.Transactional
 import grails.web.databinding.DataBinder
 import grails.web.servlet.mvc.GrailsParameterMap
 
+/**
+ * Date/檔案建立日期: 2020-02-07
+ *Time/檔案建立時間: 09:31
+ * File Description/檔案描述:BS系統選單
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 @Transactional
 class BsService implements DataBinder {
     def i18nService,toolBoxService

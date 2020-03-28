@@ -4,6 +4,13 @@ import grails.gorm.transactions.Transactional
 import org.springframework.context.MessageSource
 import org.springframework.web.servlet.i18n.SessionLocaleResolver
 
+/**
+ * Date/檔案建立日期: 2020-02-07
+ *Time/檔案建立時間: 09:31
+ * File Description/檔案描述:多國語系
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 @Transactional
 class I18nService {
 

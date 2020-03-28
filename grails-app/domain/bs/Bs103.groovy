@@ -1,5 +1,9 @@
 package bs
 
+/**
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 class Bs103 {
 
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]

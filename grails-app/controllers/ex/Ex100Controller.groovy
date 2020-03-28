@@ -4,6 +4,8 @@ import grails.converters.JSON
 
 /**
  * 範例程式
+ * @author JamesChang
+ * @since Grails4.0.1
  */
 class Ex100Controller {
 

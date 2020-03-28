@@ -1,5 +1,10 @@
 package bs
 
+/**
+ * 省市縣市代碼
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 class Bs202 {
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
     UUID id

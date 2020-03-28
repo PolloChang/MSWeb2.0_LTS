@@ -2,6 +2,10 @@ package bs
 
 import grails.converters.JSON
 
+/**
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 class BsController {
     def bsService
 

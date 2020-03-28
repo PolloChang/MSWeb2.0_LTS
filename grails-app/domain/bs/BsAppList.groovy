@@ -1,5 +1,10 @@
 package bs
 
+/**
+ * 程式清單
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 class BsAppList {
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
     UUID id

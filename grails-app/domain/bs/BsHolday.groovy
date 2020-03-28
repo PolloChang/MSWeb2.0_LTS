@@ -1,5 +1,10 @@
 package bs
 
+/**
+ * 節日表
+ * @author JamesChang
+ * @since Grails4.0.1
+ */
 class BsHolday {
 
     static auditable = [ignore: ['dateCreated', 'lastUpdated', 'manCreated', 'manLastUpdated']]
