@@ -128,13 +128,16 @@ class Bs100Service implements DataBinder {
     def bs101DoSave(GrailsParameterMap params){
         LinkedHashMap result = [:]
         Bs101 bs101I
+        println '?'
+        println params
+        println params?.bs101
         if(params.bs101.id){
-            bs101I = toolBoxService.beforeUpdate(Bs100.get(params.bs101.id),bs101I)
+            bs101I = toolBoxService.beforeUpdate(Bs101.get(params.bs101.id),bs101I)
         }
         else {
             bs101I = toolBoxService.beforeInsert(new Bs101(),bs101I)
             bs101I.ptype = params.bs101.ptype
-            bs101I.pcode = params.bs101.pcode
+            bs101I.pcode = params.bs101.pcode.toLong()
         }
         result.bean = bs101I
 
@@ -175,6 +178,62 @@ class Bs100Service implements DataBinder {
         finally {
             return result
         }
+
+    }
+
+    /**
+     * 查詢BS101資料
+     * @param params
+     * @return LinkedHashMap
+     */
+    def filterBs101(GrailsParameterMap params){
+        LinkedHashMap result = [:]
+        def searchData = [:]
+        def showRows = []
+
+        //相等
+        searchData.equalList = ['ptype']
+        //相等
+        searchData.equalIntegerList = ['pcode']
+        //相似
+        searchData.likeList = ['typedesc']
+
+        def bs101L = Bs101.createCriteria().list {
+            'in'("issure", ['1'.toInteger(),'2'.toInteger()])
+
+            searchData.equalList.each {field ->
+                if(params."${field}"){
+                    eq(field,params."${field}")
+                }
+            }
+
+            searchData.equalIntegerList.each {field ->
+                if(params."${field}"){
+                    eq(field,params."${field}".toLong())
+                }
+            }
+
+            searchData.likeList.each {field ->
+                if(params."${field}"){
+                    like(field,'%'+params."${field}"+'%')
+                }
+            }
+
+        }
+
+        bs101L.each {
+            def row = [:]
+            row.id = it?.id.toString()
+            row.ptype = it?.ptype
+            row.pcode = it?.pcode
+            row.ptype = it?.ptype
+            row.typedesc = it?.typedesc
+
+            showRows << row
+        }
+
+        result.rows = showRows
+        return result
 
     }
 

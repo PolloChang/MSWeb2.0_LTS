@@ -52,7 +52,9 @@
             type: "POST",
             ataType: "JSON",
             success: function (json) {
-
+                if(json.acrtionIsSuccess){
+                    colseModalAfterDoDelete('${modalId}');
+                }
             }
         });
     }

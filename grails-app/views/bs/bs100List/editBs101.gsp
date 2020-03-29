@@ -38,7 +38,7 @@
         </form>
     </jc:moalBody>
     <jc:moalFooter>
-        <jc:bottom type="button" class="btn btn-primary" onclick="doUpdate()">${g.message(code: 'default.button.save.label')}</jc:bottom>
+        <jc:bottom type="button" class="btn btn-primary" onclick="doUpdateB101()">${g.message(code: 'default.button.save.label')}</jc:bottom>
         <jc:bottom type="button" class="btn btn-danger" onclick="doDelete()">${g.message(code: 'default.button.delete.label')}</jc:bottom>
     </jc:moalFooter>
 </jc:modalContent>
@@ -47,16 +47,16 @@
     /**
     * 更新
     */
-    function doUpdate() {
+    function doUpdateB101() {
         var nextPageUrl =  "${createLink(controller:'bs100',action: "editPageBs101")}/";
         jQuery.ajax({
             url:"${createLink(controller: "bs100" ,action: "doUpdateBs101")}",
-            data: $('#form').serialize(),
+            data: $('#bs101-form').serialize(),
             type: "POST",
             ataType: "JSON",
             success: function (json) {
                 if(json.acrtionIsSuccess){
-                    forwardEditModeAfterDoSave('${modalId}','modalSpan',nextPageUrl+json.forWardId);
+                    forwardEditModeAfterDoSave('${modalId}','bs101ModalSpan',nextPageUrl+json.forWardId);
                 }
                 else{
                     doSaveFaild('bs101-active-message',json.acrtionMessage);

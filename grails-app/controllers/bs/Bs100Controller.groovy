@@ -92,13 +92,15 @@ class Bs100Controller {
      * BS101編輯頁面
      */
     def editPageBs101 = {
+        println params
         def modalId = params?.modalId
         def bs101I = Bs101.get(params?.id)
+        println 98
         render view: '/bs/bs100List/editBs101', model: ['modalId':modalId,readonly:false,bs101I:bs101I]
     }
 
     /**
-     * 新增選單
+     * 新增選單Bs101
      * @return JSON
      */
     def doInsertBs101(){
@@ -133,6 +135,21 @@ class Bs100Controller {
      */
     def doDeleteBs101(){
         LinkedHashMap result = bs100Service.doDeleteBs101(params)
+        render result as JSON
+    }
+
+    /**
+     *  查詢BS101資料
+     * @return JSON
+     */
+    def filterBs101(){
+        LinkedHashMap result = [:]
+        if(params?.params){
+            result = bs100Service.filterBs101(params)
+        }
+        else{
+            result.rows = []
+        }
         render result as JSON
     }
 }

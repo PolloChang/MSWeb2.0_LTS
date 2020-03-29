@@ -160,12 +160,18 @@ function ajaxChangSelectOption(thisVal,optionId,url){
         },
         beforeSend:function(){
             select.children('option').remove();
+        },
+        error:function () {
+            Swal.fire('錯誤','請洽系統管理員','error');
         }
     });
 }
 
 /**
  * 查詢
+ * @param searchTableId bootstrapTable Id
+ * @param serializeId 查詢from的ID
+ * @param url 查詢的URL
  */
 function searchFrom(searchTableId,serializeId,url){
     jQuery(document.getElementById(searchTableId)).bootstrapTable('refresh',{
@@ -188,8 +194,16 @@ function openMondal(mondalId,url){
         success: function (html) {
             jQuery('#'+mondalId).html(html);
             jQuery('#'+openMondalId).modal('show');
+        },
+        error:function () {
+            Swal.fire('錯誤','請洽系統管理員','error');
         }
     });
+}
+
+function colseModalAfterDoDelete(modalId) {
+    Swal.fire('刪除成功!','請重新查詢資料','success');
+    jQuery('#'+modalId).modal('hide');
 }
 
 /**

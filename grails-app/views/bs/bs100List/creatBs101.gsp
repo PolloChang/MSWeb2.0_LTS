@@ -38,7 +38,7 @@
         </form>
     </jc:moalBody>
     <jc:moalFooter>
-        <jc:bottom type="button" class="btn btn-primary" onclick="doInsert()">${g.message(code: 'default.button.save.label')}</jc:bottom>
+        <jc:bottom type="button" class="btn btn-primary" onclick="doInsertBs101()">${g.message(code: 'default.button.save.label')}</jc:bottom>
     </jc:moalFooter>
 </jc:modalContent>
 <script type="text/javascript">
@@ -46,7 +46,7 @@
     /**
      * 儲存
      */
-    function doInsert() {
+    function doInsertBs101() {
         var nextPageUrl =  "${createLink(controller:'bs100',action: "editPageBs101")}/";
         jQuery.ajax({
             url:"${createLink(controller: "bs100" ,action: "doInsertBs101")}",
@@ -55,7 +55,7 @@
             ataType: "JSON",
             success: function (json) {
                 if(json.acrtionIsSuccess){
-                    forwardEditModeAfterDoSave('${modalId}','modalSpan',nextPageUrl+json.forWardId);
+                    forwardEditModeAfterDoSave('${modalId}','bs101ModalSpan',nextPageUrl+json.forWardId);
                 }
                 else{
                     doSaveFaild('bs101-active-message',json.acrtionMessage);
