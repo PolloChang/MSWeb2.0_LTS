@@ -92,10 +92,8 @@ class Bs100Controller {
      * BS101編輯頁面
      */
     def editPageBs101 = {
-        println params
         def modalId = params?.modalId
         def bs101I = Bs101.get(params?.id)
-        println 98
         render view: '/bs/bs100List/editBs101', model: ['modalId':modalId,readonly:false,bs101I:bs101I]
     }
 

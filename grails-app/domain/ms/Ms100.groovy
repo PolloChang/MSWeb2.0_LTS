@@ -24,6 +24,8 @@ class Ms100 {
     String      accountNo
     String      bankNo
 
+    String      statusDesc
+
     static mapping = {
         dynamicInsert true
         table 'MS100'
@@ -41,6 +43,8 @@ class Ms100 {
         accountName         column:"ACCOUNT_NAME"               ,comment:"帳戶中文名稱"
         accountNo           column:"ACCOUNT_NO"                 ,comment:"帳號"
         bankNo              column:"BANK_NO"                    ,comment:"銀行代碼"
+
+        statusDesc          comment:"帳本類別中文敘述"          ,formula: "(SELECT bs.TYPEDESC FROM bs101 bs WHERE bs.PTYPE = 'MS100_STATUS' AND bs.PCODE = STATUS )"
     }
 
     static constraints = {
@@ -56,6 +60,8 @@ class Ms100 {
         accountName         (nullable:true,maxSize: 50)
         accountNo           (nullable:true,maxSize: 50)
         bankNo              (nullable:true,maxSize: 5)
+
+        statusDesc          (nullable:true)
     }
 
     /**
