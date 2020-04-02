@@ -25,6 +25,7 @@ class Bs101 {
     Integer     exceptionInt1
     Integer     exceptionInt2
     Integer     exceptionInt3
+    String      remark
 
 
     static mapping = {
@@ -48,6 +49,7 @@ class Bs101 {
         exceptionInt1       column: "EXCEPTION_INT1",   comment:"例外數字1"
         exceptionInt2       column: "EXCEPTION_INT2",   comment:"例外數字2"
         exceptionInt3       column: "EXCEPTION_INT3",   comment:"例外數字3"
+        remark              column: "REMARK",           comment:"備註"
 
         sort idx: "asc" // or "asc"
     }
@@ -70,6 +72,7 @@ class Bs101 {
         exceptionInt1       (nullable:true)
         exceptionInt2       (nullable:true)
         exceptionInt3       (nullable:true)
+        remark              (nullable:true)
     }
 
 
@@ -79,6 +82,6 @@ class Bs101 {
     ArrayList updateBindMap = [
             'typedesc','idx',
             'exceptionString1','exceptionString2','exceptionString3',
-            'exceptionInt1','exceptionInt2','exceptionInt3'
+            'exceptionInt1','exceptionInt2','exceptionInt3','remark'
     ]
 }

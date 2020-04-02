@@ -39,6 +39,7 @@
     </jc:moalBody>
     <jc:moalFooter>
         <jc:bottom type="button" class="btn btn-primary" onclick="doInsertBs101()">${g.message(code: 'default.button.save.label')}</jc:bottom>
+        <jc:bottom type="button" class="btn btn-primary" onclick="doInsertAfterSaveBs101()">${g.message(code: 'default.button.doInsertAfterSave.label')}</jc:bottom>
     </jc:moalFooter>
 </jc:modalContent>
 <script type="text/javascript">
@@ -48,6 +49,30 @@
      */
     function doInsertBs101() {
         var nextPageUrl =  "${createLink(controller:'bs100',action: "editPageBs101")}/";
+        jQuery.ajax({
+            url:"${createLink(controller: "bs100" ,action: "doInsertBs101")}",
+            data: $('#bs101-form').serialize(),
+            type: "POST",
+            ataType: "JSON",
+            success: function (json) {
+                if(json.acrtionIsSuccess){
+                    forwardEditModeAfterDoSave('${modalId}','bs101ModalSpan',nextPageUrl+json.forWardId);
+                }
+                else{
+                    doSaveFaild('bs101-active-message',json.acrtionMessage);
+                }
+            },
+            beforeSend:function(){
+                doSaveBeforSend('bs101-active-message');
+            }
+        });
+    }
+
+    /**
+     *  儲存後新增下一筆
+     */
+    function doInsertAfterSaveBs101() {
+        var nextPageUrl =  "${createLink(controller:'bs100',action: "creatPageBs101")}/";
         jQuery.ajax({
             url:"${createLink(controller: "bs100" ,action: "doInsertBs101")}",
             data: $('#bs101-form').serialize(),

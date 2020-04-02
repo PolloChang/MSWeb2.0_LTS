@@ -128,9 +128,6 @@ class Bs100Service implements DataBinder {
     def bs101DoSave(GrailsParameterMap params){
         LinkedHashMap result = [:]
         Bs101 bs101I
-        println '?'
-        println params
-        println params?.bs101
         if(params.bs101.id){
             bs101I = toolBoxService.beforeUpdate(Bs101.get(params.bs101.id),bs101I)
         }

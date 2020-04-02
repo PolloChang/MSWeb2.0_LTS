@@ -1,3 +1,4 @@
+<%@ page import="bs.BsAppList" %>
 %{--iframe專有--}%
 <!doctype html>
 <html lang="zh-TW" class="no-js">

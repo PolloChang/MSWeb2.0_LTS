@@ -60,5 +60,11 @@
             <jc:numberField name="bs101.exceptionInt3" value="${bs101I?.exceptionInt3}" readonly="${readonly}" />
         </td>
     </tr>
+    <tr>
+        <th class="table-info text-right" scope="row">${g.message(code: 'bs101.remark.label')}</th>
+        <td colspan="3">
+            <jc:textarea name="bs101.remark" value="${bs101I?.remark}" readonly="${readonly}" />
+        </td>
+    </tr>
     </tbody>
 </table>

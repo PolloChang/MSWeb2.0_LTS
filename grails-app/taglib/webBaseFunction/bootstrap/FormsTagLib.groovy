@@ -79,6 +79,22 @@ class FormsTagLib {
     }
 
     /**
+     * textarea
+     */
+    Closure textarea  = { attrs ->
+
+        String name = attrs.remove("name")?:""
+        String id = attrs.remove("id")?:name
+
+        String cssClass = attrs.remove("cssClass")?:""
+        String value = attrs.remove("value")?:""
+        boolean readonly = attrs.remove("readonly")?:false
+
+
+        out << "<textarea id='${id}' name='${name}'  class='form-control ${cssClass}' id=\"exampleFormControlTextarea1\" rows=\"3\" ${readonly}>${value}</textarea>"
+    }
+
+    /**
      * 數值
      */
     Closure numberField = { attrs ->
