@@ -28,26 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th class="table-info text-right" scope="row">${g.message(code: 'ms100.status.label')}</th>
-                            <td>
-                                <jc:multipleSelect name="status" from="${bs.Bs101.findAllByPtype('MS100_STATUS')}" optionKey="pcode" optionValue="typedesc" noSelection="['':'---']" />
-                            </td>
-                            <th class="table-info text-right" scope="row">${g.message(code: 'ms100.ownerName.label')}</th>
-                            <td>
-                                <jc:textField name="ownerName" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="table-info text-right" scope="row">${g.message(code: 'ms100.accountNo.label')}</th>
-                            <td>
-                                <jc:textField name="accountNo" />
-                            </td>
-                            <th class="table-info text-right" scope="row">${g.message(code: 'ms100.accountName.label')}</th>
-                            <td>
-                                <jc:textField name="accountName" />
-                            </td>
-                        </tr>
+                        <g:render template="/ms/ms100/ms100SearchForm" />
                     </tbody>
                     <tfoot><tr><td colspan="4">
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
@@ -68,9 +49,7 @@
         <a id="AC" name="C" accesskey="C" href="#C" title="${message(code: 'system.free.center.label')}"> ::: </a>
         <jc:bootstrapTable id="searchTable" url="${g.createLink(controller: 'ms100', action: "filter")}">
             <th data-field="id" data-formatter="formatterEditButton">${g.message(code: 'ms100.accountName.label')}</th>
-            <th data-field="ownerName">${g.message(code: 'ms100.ownerName.label')}</th>
-            <th data-field="status">${g.message(code: 'ms100.status.label')}</th>
-            <th data-field="accountNo">${g.message(code: 'ms100.accountNo.label')}</th>
+            <g:render template="/ms/ms100/ms100FilterL" />
         </jc:bootstrapTable>
     </div>
     <!-- Modal -->

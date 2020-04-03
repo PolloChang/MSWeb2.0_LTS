@@ -72,7 +72,7 @@
      *  儲存後新增下一筆
      */
     function doInsertAfterSaveBs101() {
-        var nextPageUrl =  "${createLink(controller:'bs100',action: "creatPageBs101")}/";
+        var nextPageUrl =  "${createLink(controller:'bs100',action: "creatPageBs101")}?ptype=${bs101I?.ptype}";
         jQuery.ajax({
             url:"${createLink(controller: "bs100" ,action: "doInsertBs101")}",
             data: $('#bs101-form').serialize(),
@@ -80,7 +80,7 @@
             ataType: "JSON",
             success: function (json) {
                 if(json.acrtionIsSuccess){
-                    forwardEditModeAfterDoSave('${modalId}','bs101ModalSpan',nextPageUrl+json.forWardId);
+                    forwardEditModeAfterDoSave('${modalId}','bs101ModalSpan',nextPageUrl);
                 }
                 else{
                     doSaveFaild('bs101-active-message',json.acrtionMessage);

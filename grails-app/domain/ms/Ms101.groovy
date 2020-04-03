@@ -24,6 +24,10 @@ class Ms101 {
     Long        status2
     Integer     amt = 0
     String      remark
+    Date        happenDate
+
+    String      status1Desc
+    String      status2Desc
 
     static mapping = {
         dynamicInsert true
@@ -42,6 +46,11 @@ class Ms101 {
         status2             column:"STATUS2"                ,comment:"金額類別，BS101.MS101_STATUS2"
         amt                 column:"AMT"                    ,comment:"金額"
         remark              column:"REMARK"                 ,comment:"備註"
+        happenDate          column:"HAPPEN_DATE"            ,comment:"收支日期"
+
+
+        status1Desc          comment:"收入或支出中文敘述"   ,formula: "(SELECT bs.TYPEDESC FROM bs101 bs WHERE bs.PTYPE = 'MS101_STATUS1' AND bs.PCODE = STATUS1 )"
+        status2Desc          comment:"金額類別中文敘述"     ,formula: "(SELECT bs.TYPEDESC FROM bs101 bs WHERE bs.PTYPE = 'MS101_STATUS2' AND bs.PCODE = STATUS2 )"
     }
 
     static constraints = {
@@ -56,13 +65,17 @@ class Ms101 {
         status2             (nullable:true)
         amt                 (nullable:false)
         remark              (nullable:true,maxSize: 500)
+        happenDate          (nullable:true)
+
+        status1Desc         (nullable:true, blank: true)
+        status2Desc         (nullable:true, blank: true)
     }
 
     /**
      * 共同儲存欄位
      */
     ArrayList updateBindMap = [
-            'status1','status2','amt','remark'
+            'status1','status2','amt','remark','happenDate'
     ]
 
 

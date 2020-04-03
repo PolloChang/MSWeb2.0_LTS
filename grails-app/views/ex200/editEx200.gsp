@@ -11,16 +11,11 @@
 </head>
 <body>
 <div class="row">
-    <div class="col-11">
-        <icon:svg iconType="cube" message="${message(code: 'system.editPage.header.title.label')}"/>
-    </div>
-    <div class="col-1">
-        <jc:bottom type="button" class="btn btn-primary" onclick="parent.closeContent('${pageId}');">關閉頁面 <icon:svg iconType="close"/></jc:bottom>
-    </div>
-</div>
-<div class="row">
     <div class="col-12 border-bottom">
         <span id="activeMessage" />
+    </div>
+    <div class="col-12 mt-2">
+        <icon:svg iconType="cube" message="${message(code: 'system.editPage.header.title.label')}"/>
     </div>
     <div class="col-12 mt-2">
         <form id="form">
