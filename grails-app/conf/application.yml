@@ -10,9 +10,9 @@ grails:
             events: false
 info:
     app:
-        name: '@info.app.name@'
-        version: '@info.app.version@'
-        grailsVersion: '@info.app.grailsVersion@'
+        name: 'MSWeb2'
+        version: '1.0'
+        grailsVersion: 'MSWeb2.V1.0'
 spring:
     jmx:
         unique-names: true
@@ -101,8 +101,6 @@ dataSource:
     pooled: true
     jmxExport: true
     driverClassName: org.mariadb.jdbc.Driver
-    username: fwjdba
-    password: 'fwjdba**831554'
     logSql: false
 
 environments:
@@ -110,15 +108,21 @@ environments:
         dataSource:
             dbCreate: none
             url: jdbc:mariadb://localhost:3306/fwjdb
+            username: fwjdba
+            password: 'fwjdba**831554'
     test:
         dataSource:
             dbCreate: none
             url: jdbc:mariadb://localhost:3306/fwjdb
+            username: fwjdba
+            password: 'fwjdba**831554'
 
     production:
         dataSource:
             dbCreate: none
-            url: jdbc:mariadb://localhost:3306/fwjdb
+            url: jdbc:mariadb://localhost:3306/fwjdb_prod
+            username: webdba
+            password: 'webdba**831554'
             properties:
                 jmxEnabled: true
                 initialSize: 5
