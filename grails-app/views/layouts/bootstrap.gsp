@@ -23,9 +23,18 @@
     </span>
     <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
-        </li>
+        <sec:ifLoggedIn>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    <sec:loggedInUserInfo field='fullname'/>
+                </a>
+                <div class="dropdown-menu navbar-dark">
+                    <g:form controller="logout">
+                        <g:submitButton class="dropdown-item navbar-dark color-light" name="Submit" value="Logout" style="color:gray" />
+                    </g:form>
+                </div>
+            </li>
+        </sec:ifLoggedIn>
     </ul>
 </nav>
 <div class="">
@@ -39,10 +48,11 @@
                             </a>
                         </li>
                     </ul>
-                    <g:render template="public/navList" />
+                    <g:render template="/public/navList" />
                 </div>
             </div>
         </nav>
+
 
         <main id="tabs-parent" role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
             <g:layoutBody/>
