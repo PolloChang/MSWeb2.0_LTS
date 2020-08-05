@@ -52,8 +52,17 @@ class FormsTagLib {
         String value = attrs.remove('value')?:""
         String Class = attrs.remove('class')?:""
         boolean readonly = attrs.remove('readonly')?:false
+        def formattedDate
+        if(value){
+            def date = new Date().parse("yyyy-MM-dd HH:mm:ss.f", value)
+            formattedDate = date.format("yyyy-MM-dd")
+        }
+        else{
+            formattedDate = ""
+        }
 
-        out << "<input id='${id}' name='${name}' value='${value}' class='form-control ${Class}' ${readonly?"readonly":""} style='width: 120px;display: inline-block;'>"
+
+        out << "<input id='${id}' name='${name}' value='${formattedDate}' class='form-control ${Class}' ${readonly?"readonly":""} style='width: 120px;display: inline-block;'>"
         out << """
                 <script type="text/javascript">
                     jQuery( function() {

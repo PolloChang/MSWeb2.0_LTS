@@ -76,7 +76,7 @@ class Ms100Service implements DataBinder {
         LinkedHashMap result = [:]
         Ms100 ms100I
         if(params.ms100.id){
-            ms100I = Ms100.get(params.ex100.id)
+            ms100I = Ms100.get(params.ms100.id)
             ms100I.version = ms100I.version +1
             ms100I.lastUpdated = new Date()
             ms100I.manLastUpdated = '系統管理員'

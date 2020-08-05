@@ -52,7 +52,7 @@ class Ms100 {
         notes				(nullable:true, maxSize: 1000)
         dateCreated			(nullable:false, blank: false)
         manCreated			(nullable:false, blank: false, maxSize: 200)
-        lastUpdated			(nullable:true)
+        lastUpdated			(nullable:true, blank: true)
         manLastUpdated		(nullable:true, maxSize: 200)
 
         status              (nullable:true)
@@ -61,7 +61,7 @@ class Ms100 {
         accountNo           (nullable:true,maxSize: 50)
         bankNo              (nullable:true,maxSize: 5)
 
-        statusDesc          (nullable:true)
+        statusDesc          (nullable:true, blank: true)
     }
 
     /**

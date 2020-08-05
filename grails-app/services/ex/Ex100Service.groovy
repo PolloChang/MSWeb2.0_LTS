@@ -1,8 +1,8 @@
 package ex
 
-import grails.gorm.transactions.Transactional
 import grails.web.databinding.DataBinder
 import grails.web.servlet.mvc.GrailsParameterMap
+import io.micronaut.spring.tx.annotation.Transactional
 
 /**
  * Date/檔案建立日期: 2020-02-07
